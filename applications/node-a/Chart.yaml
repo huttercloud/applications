@@ -1,0 +1,5 @@
+apiVersion: v2
+name: node-a
+description: App of Apps Chart for argocd deployments
+type: application
+version: 0.1.0
