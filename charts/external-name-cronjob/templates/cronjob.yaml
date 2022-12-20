@@ -25,19 +25,19 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: zoneId
-                  name: externalname
+                  name: {{ .Release.Name }}
                   optional: false
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   key: accessKey
-                  name: externalname
+                  name: {{ .Release.Name }}
                   optional: false
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: secretKey
-                  name: externalname
+                  name: {{ .Release.Name }}
                   optional: false
             - name: AWS_DEFAULT_REGION
               value: eu-central-1
