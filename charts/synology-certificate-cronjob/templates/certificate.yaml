@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+spec:
+  dnsNames:
+    - nas.hutter.cloud
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-dns
+  secretName: synology-certificate-cert
