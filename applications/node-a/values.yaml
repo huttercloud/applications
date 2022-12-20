@@ -2,4 +2,4 @@
 
 spec:
   destination:
-    server: https://node-b.hutter.cloud:16443
+    server: https://node-a.hutter.cloud:16443
