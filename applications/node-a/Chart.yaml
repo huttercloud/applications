@@ -1,5 +1,5 @@
 apiVersion: v2
 name: node-a
-description: App of Apps Chart for argocd deployments
+description: App of Apps - installs all services on node-a
 type: application
 version: 0.1.0
