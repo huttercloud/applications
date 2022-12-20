@@ -15,5 +15,5 @@ data:
 
     exec python3 /script/synology-certificate.py  upsert.json: |
     
-  synology-certificate.py:  
-{{ .Files.Get "synology-certificate.py" | indent 4 }}
+  synology-certificate.py: |
+    {{ .Files.Get "synology-certificate.py" | nindent 4 }}
