@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-nginx-1
+spec:
+  volumes:
+    - name: {{ .Release.Name }}-downloads-complete
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-downloads-complete
+    - name: {{ .Release.Name }}-downloads-incomplete
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-downloads-incomplete
+    - name: {{ .Release.Name }}-bazarr
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-bazarr
+    - name: {{ .Release.Name }}-sonarr
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-sonarr
+    - name: {{ .Release.Name }}-radarr
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-radarr
+    - name: {{ .Release.Name }}-nzbhydra
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-nzbhydra
+    - name: {{ .Release.Name }}-library-movies
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-library-movies
+    - name: {{ .Release.Name }}-library-tv
+      persistentVolumeClaim:
+        claimName: {{ .Release.Name }}-library-tv
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: {{ .Release.Name }}-downloads-complete
+          mountPath: /opt/{{ .Release.Name }}-downloads-complete
+        - name: {{ .Release.Name }}-downloads-incomplete
+          mountPath: /opt/{{ .Release.Name }}-downloads-incomplete
+        - name: {{ .Release.Name }}-bazarr
+          mountPath: /opt/{{ .Release.Name }}-bazarr
+        - name: {{ .Release.Name }}-sonarr
+          mountPath: /opt/{{ .Release.Name }}-sonarr
+        - name: {{ .Release.Name }}-radarr
+          mountPath: /opt/{{ .Release.Name }}-radarr
+        - name: {{ .Release.Name }}-nzbhydra
+          mountPath: /opt/{{ .Release.Name }}-nzbhydra
+        - name: {{ .Release.Name }}-library-movies
+          mountPath: /opt/{{ .Release.Name }}-library-movies
+        - name: {{ .Release.Name }}-library-tv
+          mountPath: /opt/{{ .Release.Name }}-library-tv
