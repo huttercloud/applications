@@ -15,6 +15,7 @@ spec:
       template:
         spec:
           automountServiceAccountToken: true
+          restartPolicy: Never
           containers:
           - command:
             - /bin/sh
