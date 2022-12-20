@@ -71,6 +71,7 @@ metadata:
 spec:
   storageClassName: library-movies
   accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
   persistentVolumeReclaimPolicy: Retain 
   nfs: 
     path: {{ .Values.library.base_path }}/movies
@@ -84,6 +85,7 @@ metadata:
 spec:
   storageClassName: library-tv
   accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
   persistentVolumeReclaimPolicy: Retain 
   nfs: 
     path: {{ .Values.library.base_path }}/tv
