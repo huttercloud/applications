@@ -23,7 +23,7 @@ data:
         {
           "Action": "UPSERT",
           "ResourceRecordSet": {
-            "Name":  "{{ Values.public_name }}",
+            "Name":  "{{ .Values.public_name }}",
             "Type": "A",
             "TTL": 300,
             "ResourceRecords": [
