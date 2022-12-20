@@ -10,4 +10,4 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-dns
-  secretName: synology-certificate-cert
+  secretName: {{ .Release.Name }}-cert

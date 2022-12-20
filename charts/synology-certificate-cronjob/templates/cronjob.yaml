@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          automountServiceAccountToken: true
+          restartPolicy: Never
+          containers:
+          - command:
+            - /bin/sh
+            - /script/script.sh
+            image: python:3
+            name: python
+            volumeMounts:
+            - mountPath: /script
+              name: script
+            - mountPath: /certificate
+              name: certificate
+            - mountPath: /ssh-key
+              name: ssh-key
+          volumes:
+          - configMap:
+              name: {{ .Release.Name }}
+            name: script
+          - secret:
+              secretName: {{ .Release.Name }}-cert
+            name: certificate
+          - secret:
+              secretName: {{ .Release.Name }}
+            name: ssh-key
+  schedule: '@hourly'
+  successfulJobsHistoryLimit: 3
+  suspend: false
