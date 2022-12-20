@@ -1,0 +1,109 @@
+#
+# setup {{ .Values.storage_class_name }} volume claims for all services
+#
+
+# store completed downloades
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-downloads-complete
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 800Gi } }
+
+# store downloads which are in progress
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-downloads-incomplete
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 800Gi } }
+
+# volumes for the different service logs and configuration files
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-bazarr
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-sonarr
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-radarr
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-nzbhydra
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+
+# nfs volumes to access shared media library
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-library-movies
+spec:
+  storageClassName: library-movies
+  accessModes: [ReadWriteMany]
+  persistentVolumeReclaimPolicy: Retain 
+  nfs: 
+    path: {{ .Values.library.base_path }}/movies
+    server: {{ .Values.library.nfs_server }}
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-library-tv
+spec:
+  storageClassName: library-tv
+  accessModes: [ReadWriteMany]
+  persistentVolumeReclaimPolicy: Retain 
+  nfs: 
+    path: {{ .Values.library.base_path }}/tv
+    server: {{ .Values.library.nfs_server }}
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-library-movies
+spec:
+  storageClassName: library-movies
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 1Gi } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-library-tv
+spec:
+  storageClassName: library-tv
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 1Gi } }

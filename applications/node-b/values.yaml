@@ -1,1 +1,5 @@
-# Default values for node-a.
+# Default values for node-b.
+
+spec:
+  destination:
+    server: https://node-b.hutter.cloud:16443
