@@ -1,0 +1,5 @@
+apiVersion: v2
+name: external-name-cronjob
+description: sets up a cronjob to update a route53 record which can be referenced as externalname
+type: application
+version: 0.1.0

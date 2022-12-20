@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-name-cronjob
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:huttercloud/applications.git
+    targetRevision: HEAD
+    path: charts/external-name-cronjob
+    helm:
+      parameters:
+        - name: public_name
+          value: infra.hutter.cloud
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: default

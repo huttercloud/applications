@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          automountServiceAccountToken: true
+          containers:
+          - command:
+            - /bin/sh
+            - /script/script.sh
+            env:
+            - name: HOSTED_ZONE_ID
+              valueFrom:
+                secretKeyRef:
+                  key: zoneId
+                  name: externalname
+                  optional: false
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: accessKey
+                  name: externalname
+                  optional: false
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secretKey
+                  name: externalname
+                  optional: false
+            - name: AWS_DEFAULT_REGION
+              value: eu-central-1
+            image: amazon/aws-cli
+            name: awscli
+            volumeMounts:
+            - mountPath: /script
+              mountPropagation: None
+              name: script
+          volumes:
+          - configMap:
+              name: {{ .Release.Name }}
+              optional: false
+            name: script
+  schedule: '@hourly'
+  successfulJobsHistoryLimit: 3
+  suspend: false
