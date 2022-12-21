@@ -8,9 +8,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-sabnzbd
   labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/name: {{ .Release.Name }}-sabnzbd
 spec:
   selector:
     matchLabels:
