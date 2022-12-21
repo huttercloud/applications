@@ -13,6 +13,12 @@ spec:
       parameters:
         - name: ingress.host
           value: usenet-2.hutter.cloud
+        # versions for sabnzbd image and helper functions
+        - name: sabnzbd.version
+          value: 3.7.1
+        - name: nzbtomedia.version
+          value: 12.1.10
+
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: default

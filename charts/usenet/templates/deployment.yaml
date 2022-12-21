@@ -4,3 +4,54 @@
 # to remove the need for a custom container
 # the container installs nzbtomedia and its requirements
 # during container startup
+
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-sabnzbd
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-sabnzbd
+    spec:
+      containers:
+      - name: sabnzbd
+        image: "lscr.io/linuxserver/sabnzbd:{{ .Values.sabnzbd.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        env:
+        - name: TZ         
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-sabnzbd
+          mountPath: /config
+        - name: {{ .Release.Name }}-downloads-complete
+          mountPath: /downloads
+        - name: {{ .Release.Name }}-downloads-incomplete
+          mountPath: /incomplete-downloads
+      volumes:
+        - name: {{ .Release.Name }}-downloads-complete
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads-complete
+        - name: {{ .Release.Name }}-downloads-incomplete
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads-incomplete
+        - name: {{ .Release.Name }}-sabnzbd
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-sabnzbd

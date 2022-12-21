@@ -73,6 +73,17 @@ spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteOnce]
   resources: { requests: { storage: 1Gi } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-sabnzbd
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
 
 # nfs volumes to access shared media library
 ---
