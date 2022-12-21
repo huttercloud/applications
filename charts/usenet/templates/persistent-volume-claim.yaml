@@ -8,6 +8,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-downloads-complete
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteMany]
@@ -19,6 +21,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-downloads-incomplete
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteMany]
@@ -30,6 +34,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-bazarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteOnce]
@@ -39,6 +45,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-sonarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteOnce]
@@ -48,6 +56,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-radarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteOnce]
@@ -57,6 +67,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-nzbhydra
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
   accessModes: [ReadWriteOnce]
@@ -68,6 +80,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ .Release.Name }}-library-movies
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: library-movies
   accessModes: [ReadWriteMany]
@@ -82,6 +96,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ .Release.Name }}-library-tv
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: library-tv
   accessModes: [ReadWriteMany]
@@ -96,6 +112,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-library-movies
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: library-movies
   accessModes: [ReadWriteMany]
@@ -105,6 +123,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-library-tv
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: library-tv
   accessModes: [ReadWriteMany]

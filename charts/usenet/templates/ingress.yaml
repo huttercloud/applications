@@ -1,0 +1,118 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-homepage
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+    kubernetes.io/ingress.class: public
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-homepage
+              port:
+                number: 80
+
+---                
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-oauth2
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    # allow bigger buffer for proxied requests, required for oauth2 oidc to work
+    # properly
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+    kubernetes.io/ingress.class: public
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /oauth2
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-oauth2-proxy
+              port:
+                number: 80
+---                
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-authenticated
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /sabnzbd
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-sabnzbd
+              port:
+                number: 80
+        - path: /radarr
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-radarr
+              port:
+                number: 80
+        - path: /sonarr
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-sonarr
+              port:
+                number: 80
+        - path: /bazarr
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-bazarr
+              port:
+                number: 80
+        - path: /nzbhydra
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-nzbhydra
+              port:
+                number: 80
+        - path: /browser
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-webdav-browser
+              port:
+                number: 80
+
+
+
+

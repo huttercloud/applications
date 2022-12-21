@@ -9,6 +9,10 @@ spec:
     repoURL: git@github.com:huttercloud/applications.git
     targetRevision: HEAD
     path: charts/usenet
+    helm:
+      parameters:
+        - name: ingress.host
+          value: usenet-2.hutter.cloud
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: default

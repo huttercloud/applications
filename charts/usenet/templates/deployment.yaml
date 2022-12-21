@@ -1,0 +1,6 @@
+---
+
+# deploy sabnzbd container
+# to remove the need for a custom container
+# the container installs nzbtomedia and its requirements
+# during container startup

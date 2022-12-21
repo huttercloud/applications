@@ -7,4 +7,6 @@ storage_class_name: persistent
 library:
   nfs_server: nas.hutter.cloud
   base_path: /volume1/library
-  
+
+ingress:
+  host: ""
