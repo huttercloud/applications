@@ -74,11 +74,11 @@ spec:
         - containerPort: 5076
         livenessProbe:
           httpGet:
-            path: /
+            path: /nzbhydra2/
             port: 5076
         readinessProbe:
           httpGet:
-            path: /
+            path: /nzbhydra2/
             port: 5076
         env:
         - name: TZ
