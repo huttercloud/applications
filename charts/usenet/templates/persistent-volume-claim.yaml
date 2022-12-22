@@ -7,7 +7,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-downloads-complete
+  name: {{ .Release.Name }}-downloads
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
@@ -20,7 +20,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-downloads-incomplete
+  name: {{ .Release.Name }}-incomplete-downloads
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
@@ -38,7 +38,7 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
-  accessModes: [ReadWriteOnce]
+  accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
 ---
 apiVersion: v1
@@ -49,7 +49,7 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
-  accessModes: [ReadWriteOnce]
+  accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
 ---
 apiVersion: v1
@@ -60,7 +60,7 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
-  accessModes: [ReadWriteOnce]
+  accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
 ---
 apiVersion: v1
@@ -71,7 +71,7 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
-  accessModes: [ReadWriteOnce]
+  accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
 ---
 apiVersion: v1
@@ -82,42 +82,8 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   storageClassName: {{ .Values.storage_class_name }}
-  accessModes: [ReadWriteOnce]
+  accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
-
-# nfs volumes to access shared media library
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .Release.Name }}-library-movies
-  labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-spec:
-  storageClassName: library-movies
-  accessModes: [ReadWriteMany]
-  capacity: { storage: 1Gi }
-  persistentVolumeReclaimPolicy: Retain 
-  nfs: 
-    path: {{ .Values.library.base_path }}/movies
-    server: {{ .Values.library.nfs_server }}
-    readOnly: false
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .Release.Name }}-library-tv
-  labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-spec:
-  storageClassName: library-tv
-  accessModes: [ReadWriteMany]
-  capacity: { storage: 1Gi }
-  persistentVolumeReclaimPolicy: Retain 
-  nfs: 
-    path: {{ .Values.library.base_path }}/tv
-    server: {{ .Values.library.nfs_server }}
-    readOnly: false
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -126,7 +92,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
-  storageClassName: library-movies
+  storageClassName: {{ .Release.Name }}-library-movies
   accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
 ---
@@ -137,6 +103,6 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
-  storageClassName: library-tv
+  storageClassName: {{ .Release.Name }}-library-tv
   accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }

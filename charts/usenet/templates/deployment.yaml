@@ -1,13 +1,139 @@
----
+##
+# bazarr
+##
+#---
 
+##
+# landing page
+##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-homepage
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-homepage
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-homepage
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: {{ .Release.Name }}-homepage
+          mountPath: /usr/share/nginx/html
+          readOnly: true
+      volumes:
+      - name: {{ .Release.Name }}-homepage
+        configMap:
+          name: {{ .Release.Name }}-homepage
+          items:
+            - key: index.html
+              path: index.html
+
+##
+# nzbhydra
+##
+#---
+##
+# oauth2 proxy for authenticated access
+##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-oauth2-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-oauth2-proxy
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-oauth2-proxy
+    spec:
+      containers:
+      # there seems to be a bug in 6+ keycloak provider which doesnt work well with jwt tokens
+      # instead using the more standard oidc provider is required.
+      # see: https://github.com/oauth2-proxy/oauth2-proxy/issues/773
+      - args:
+        # general config
+        - --http-address=0.0.0.0:4180
+        - --email-domain=*
+        - --upstream=file:///dev/null
+        # pass auth headers
+        - --pass-basic-auth=false
+        - --pass-access-token=true
+        - --set-xauthrequest=true
+        - --set-authorization-header=true
+        - --pass-authorization-header=true
+        - --skip-provider-button=true
+        - --skip-auth-preflight=true
+        - --pass-host-header=true
+        # if jwt bearer token exists dont do a new authentication
+        # but verify auth (e.g. for scripts)
+        - --skip-jwt-bearer-tokens=true
+        # auth0 configuration
+        - --provider=oidc
+        - --skip-oidc-discovery=false
+        - --oidc-issuer-url=https://hutter-cloud.eu.auth0.com/
+        - --scope=openid profile email
+
+        env:
+        - name: OAUTH2_PROXY_CLIENT_ID
+          valueFrom:
+              secretKeyRef:
+                name: oauth2-proxy-secrets
+                key: client_id
+        - name: OAUTH2_PROXY_CLIENT_SECRET
+          valueFrom:
+              secretKeyRef:
+                name: oauth2-proxy-secrets
+                key: client_secret
+        - name: OAUTH2_PROXY_COOKIE_SECRET
+          valueFrom:
+              secretKeyRef:
+                name: oauth2-proxy-secrets
+                key: cookie_secret
+        image: "quay.io/oauth2-proxy/oauth2-proxy:{{ .Values.oauth2proxy.version }}"
+        imagePullPolicy: Always
+        name: oauth2-proxy
+        ports:
+        - containerPort: 4180
+          protocol: TCP
+
+##
+# radarr
+##
+#---
+
+##
+# sabnzbd container
 # deploy sabnzbd container
 # to remove the need for a custom container
 # the container installs nzbtomedia and its requirements
 # during container startup
-
+##
+---
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: {{ .Release.Name }}-sabnzbd
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}-sabnzbd
@@ -36,22 +162,32 @@ spec:
             path: /
             port: 8080
         env:
-        - name: TZ         
+        - name: TZ
           value: Europe/Zurich
         volumeMounts:
         - name: {{ .Release.Name }}-sabnzbd
           mountPath: /config
-        - name: {{ .Release.Name }}-downloads-complete
+        - name: {{ .Release.Name }}-downloads
           mountPath: /downloads
-        - name: {{ .Release.Name }}-downloads-incomplete
+        - name: {{ .Release.Name }}-incomplete-downloads
           mountPath: /incomplete-downloads
       volumes:
-        - name: {{ .Release.Name }}-downloads-complete
+        - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-downloads-complete
-        - name: {{ .Release.Name }}-downloads-incomplete
+            claimName: {{ .Release.Name }}-downloads
+        - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-downloads-incomplete
+            claimName: {{ .Release.Name }}-incomplete-downloads
         - name: {{ .Release.Name }}-sabnzbd
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-sabnzbd
+
+##
+# sonarr
+##
+#---
+
+##
+# webdav browser
+##
+#---

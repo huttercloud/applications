@@ -1,10 +1,106 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-bazarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 6767
+  selector:
+    app: {{ .Release.Name }}-bazarr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-homepage
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: {{ .Release.Name }}-homepage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-nzbhydra
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 5076
+  selector:
+    app: {{ .Release.Name }}-nzbhydra
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-oauth2-proxy
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    app: {{ .Release.Name }}-oauth2-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-radarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 7878
+  selector:
+    app: {{ .Release.Name }}-radarr
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}-sabnzbd
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   ports:
   - port: 80
     targetPort: 8080
   selector:
     app: {{ .Release.Name }}-sabnzbd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-sonarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 8989
+  selector:
+    app: {{ .Release.Name }}-sonarr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-webdav-browser
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: {{ .Release.Name }}-webdav-browser

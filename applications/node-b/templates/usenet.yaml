@@ -18,6 +18,8 @@ spec:
           value: 3.7.1
         - name: nzbtomedia.version
           value: 12.1.10
+        - name: oauth2proxy.version
+          value: v7.4.0
 
   destination:
     server: {{ .Values.spec.destination.server }}

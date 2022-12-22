@@ -1,0 +1,124 @@
+# nfs volumes to access shared media library
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-library-movies
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-library-movies
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: {{ .Values.library.base_path }}/movies
+    server: {{ .Values.library.nfs_server }}
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-library-tv
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-library-tv
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: {{ .Values.library.base_path }}/tv
+    server: {{ .Values.library.nfs_server }}
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-bazarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-bazarr
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/bazarr"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-downloads
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-downloads
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/downloads"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-incomplete-downloads
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-incomplete-downloads
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/incomplete-downloads"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-nzbhydra
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-nzbhydra
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/nzbhydra"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-radarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-radarr
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/radarr"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-sabnzbd
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-sabnzbd
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/sabnzbd"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-sonarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-sonarr
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  hostPath:
+    path: "/data/usenet/sonarr"
