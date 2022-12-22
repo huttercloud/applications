@@ -290,17 +290,6 @@ spec:
       labels:
         app: {{ .Release.Name }}-file-browser
     spec:
-      initContainers:
-      - name: configuration
-        image: alpine
-        command:
-          - /bin/sh
-          - /script/script.sh
-        volumeMounts:
-        - name: {{ .Release.Name }}-file-browser-init
-          mountPath: /script
-        - name: {{ .Release.Name }}-file-browser
-          mountPath: /config
       containers:
       - name: filebrowser
         image: "filebrowser/filebrowser:{{ .Values.filebrowser.version }}"
@@ -317,27 +306,14 @@ spec:
             port: 80
         command:
         - /filebrowser
-        - --noauth
         - --port
         - "80"
         - --disable-exec
+        - --noauth
         volumeMounts:
-        # - name: {{ .Release.Name }}-file-browser
-        #   mountPath: /database.db
-        #   subPath: database.db
-        # - name: {{ .Release.Name }}-file-browser
-        #   mountPath: /.filebrowser.json
-        #   subPath: .filebrowser.json
         - name: {{ .Release.Name }}-downloads
           mountPath: /srv
-
       volumes:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-downloads
-        - name: {{ .Release.Name }}-file-browser
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-file-browser
-        - name: {{ .Release.Name }}-file-browser-init
-          configMap:
-            name: {{ .Release.Name }}-file-browser-init

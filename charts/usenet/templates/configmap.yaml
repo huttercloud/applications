@@ -102,28 +102,3 @@ data:
     # ensure download folders arent included in backup
     touch /incomplete-downloads/.nobackup
     touch /downloads/.nobackup
-
-##
-# nzbtomedia init script
-##
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-file-browser-init
-  labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-data:
-  script.sh: |
-    #!/bin/sh
-
-    cd /config
-
-    # check if db file needs to be created
-    if [ ! -f database.db ]; then
-        touch database.db
-    fi
-
-    if [ ! -f .filebrowser.json ]; then
-        echo CnsKICAicG9ydCI6IDgwLAogICJiYXNlVVJMIjogIiIsCiAgImFkZHJlc3MiOiAiIiwKICAibG9nIjogInN0ZG91dCIsCiAgImRhdGFiYXNlIjogIi9kYXRhYmFzZS5kYiIsCiAgInJvb3QiOiAiL3NydiIKfQoK | base64 -d > .filebrowser.json
-    fi

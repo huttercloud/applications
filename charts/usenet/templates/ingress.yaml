@@ -55,7 +55,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name }}-authenticated
+  name: {{ .Release.Name }}-sabnzbd
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
   annotations:
@@ -77,6 +77,25 @@ spec:
               name: {{ .Release.Name }}-sabnzbd
               port:
                 number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-radarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
         - path: /radarr
           pathType: Prefix
           backend:
@@ -84,6 +103,25 @@ spec:
               name: {{ .Release.Name }}-radarr
               port:
                 number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-sonarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
         - path: /sonarr
           pathType: Prefix
           backend:
@@ -91,6 +129,25 @@ spec:
               name: {{ .Release.Name }}-sonarr
               port:
                 number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-bazarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
         - path: /bazarr
           pathType: Prefix
           backend:
@@ -98,6 +155,25 @@ spec:
               name: {{ .Release.Name }}-bazarr
               port:
                 number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-nzbhydra2
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
         - path: /nzbhydra2
           pathType: Prefix
           backend:
@@ -105,6 +181,25 @@ spec:
               name: {{ .Release.Name }}-nzbhydra2
               port:
                 number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-browser
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
         - path: /browser
           pathType: Prefix
           backend:
@@ -112,4 +207,3 @@ spec:
               name: {{ .Release.Name }}-file-browser
               port:
                 number: 80
-
