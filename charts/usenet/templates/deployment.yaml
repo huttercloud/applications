@@ -295,9 +295,10 @@ spec:
         image: alpine
         command:
           - /bin/sh
-          - -c
-          - "touch /config/database.db && [ ! -f /config/.filebrowser.json ] && echo CnsKICAicG9ydCI6IDgwLAogICJiYXNlVVJMIjogIiIsCiAgImFkZHJlc3MiOiAiIiwKICAibG9nIjogInN0ZG91dCIsCiAgImRhdGFiYXNlIjogIi9kYXRhYmFzZS5kYiIsCiAgInJvb3QiOiAiL3NydiIKfQoK | base64 -d /config/.filebrowser.json"
+          - /script/script.sh
         volumeMounts:
+        - name: {{ .Release.Name }}-file-browser-init
+          mountPath: /script
         - name: {{ .Release.Name }}-file-browser
           mountPath: /config
       containers:
@@ -331,3 +332,6 @@ spec:
         - name: {{ .Release.Name }}-file-browser
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-file-browser
+        - name: {{ .Release.Name }}-file-browser-init
+          configMap:
+            name: {{ .Release.Name }}-file-browser-init
