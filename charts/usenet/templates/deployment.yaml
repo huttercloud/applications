@@ -318,10 +318,10 @@ spec:
         command:
         - /filebrowser
         - --baseurl
-        - https://{{ .Values.ingress.host }}/browser
+        - {{ .Values.ingress.host }}/browser
         - --noauth
         - --port
-        - "9999"
+        - "80"
         volumeMounts:
         # - name: {{ .Release.Name }}-file-browser
         #   mountPath: /database.db
