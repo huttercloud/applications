@@ -5,6 +5,8 @@ metadata:
   namespace: default
 spec:
   project: default
+  syncPolicy:
+    automated: {}
   source:
     repoURL: git@github.com:huttercloud/applications.git
     targetRevision: HEAD
