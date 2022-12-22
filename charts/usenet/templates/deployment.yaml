@@ -193,6 +193,8 @@ spec:
     matchLabels:
       app: {{ .Release.Name }}-sabnzbd
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
