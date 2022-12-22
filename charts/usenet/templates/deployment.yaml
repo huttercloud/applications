@@ -310,6 +310,8 @@ spec:
         - "80"
         - --disable-exec
         - --noauth
+        - --baseurl
+        - /browser
         volumeMounts:
         - name: {{ .Release.Name }}-downloads
           mountPath: /srv
