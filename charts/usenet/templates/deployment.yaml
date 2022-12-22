@@ -175,7 +175,7 @@ spec:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-downloads
-        - name: {{ .Release.Name }}-downloads
+        - name: {{ .Release.Name }}-incomplete-downloads
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-incomplete-downloads
         - name: {{ .Release.Name }}-sabnzbd
