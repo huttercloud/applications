@@ -59,6 +59,8 @@ spec:
     matchLabels:
       app: {{ .Release.Name }}-nzbhydra2
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -107,6 +109,8 @@ metadata:
   name: {{ .Release.Name }}-oauth2-proxy
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: {{ .Release.Name }}-oauth2-proxy
