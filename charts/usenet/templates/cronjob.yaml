@@ -25,10 +25,20 @@ spec:
             volumeMounts:
             - mountPath: /script
               name: script
+            - name: {{ .Release.Name }}-downloads
+              mountPath: /downloads
+            - name: {{ .Release.Name }}-incomplete-downloads
+              mountPath: /incomplete-downloads
           volumes:
           - configMap:
               name: {{ .Release.Name }}-sabnzbd-cleanup
             name: script
+          - name: {{ .Release.Name }}-downloads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads
+          - name: {{ .Release.Name }}-incomplete-downloads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-incomplete-downloads
   schedule: '@daily'
   successfulJobsHistoryLimit: 3
   suspend: false
