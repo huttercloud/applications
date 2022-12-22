@@ -98,3 +98,7 @@ data:
     if [ -f /nzbtomedia/autoProcessMedia.cfg ]; then
         cp -f /nzbtomedia/nzbToMedia/autoProcessMedia.cfg
     fi
+
+    # ensure download folders arent included in backup
+    touch /incomplete-downloads/.nobackup
+    touch /downloads/.nobackup

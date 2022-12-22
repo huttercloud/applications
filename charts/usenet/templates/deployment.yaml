@@ -158,6 +158,10 @@ spec:
           mountPath: /script
         - name: {{ .Release.Name }}-nzbtomedia
           mountPath: /nzbtomedia
+        - name: {{ .Release.Name }}-downloads
+          mountPath: /downloads
+        - name: {{ .Release.Name }}-incomplete-downloads
+          mountPath: /incomplete-downloads
       containers:
       - name: sabnzbd
         image: "lscr.io/linuxserver/sabnzbd:{{ .Values.sabnzbd.version }}"
