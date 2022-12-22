@@ -296,7 +296,7 @@ spec:
         command:
           - /bin/sh
           - -c
-          - "touch /config/database.db && touch /config/.filebrowser.json"
+          - "touch /config/database.db && [ ! -f /config/.filebrowser.json ] && echo CnsKICAicG9ydCI6IDgwLAogICJiYXNlVVJMIjogIiIsCiAgImFkZHJlc3MiOiAiIiwKICAibG9nIjogInN0ZG91dCIsCiAgImRhdGFiYXNlIjogIi9kYXRhYmFzZS5kYiIsCiAgInJvb3QiOiAiL3NydiIKfQoK | base64 -d /config/.filebrowser.json"
         volumeMounts:
         - name: {{ .Release.Name }}-file-browser
           mountPath: /config
