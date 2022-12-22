@@ -12,8 +12,8 @@ spec:
     helm:
       parameters:
         - name: ingress.host
-          value: usenet-2.hutter.cloud
-        # versions for sabnzbd image and helper functions
+          value: usenet.hutter.cloud
+        # versions for usenet services
         - name: sabnzbd.version
           value: 3.7.1
         - name: nzbtomedia.version
