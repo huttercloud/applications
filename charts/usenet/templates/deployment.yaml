@@ -301,7 +301,7 @@ spec:
         - name: {{ .Release.Name }}-file-browser
           mountPath: /config
       containers:
-      - name: sabnzbd
+      - name: filebrowser
         image: "filebrowser/filebrowser:{{ .Values.filebrowser.version }}"
         imagePullPolicy: IfNotPresent
         ports:
@@ -320,9 +320,10 @@ spec:
           subPath: database.db
         - name: {{ .Release.Name }}-file-browser
           mountPath: /.filebrowser.json
+          subPath: .filebrowser.json
         - name: {{ .Release.Name }}-downloads
           mountPath: /srv
-          subPath: .filebrowser.json
+
       volumes:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
