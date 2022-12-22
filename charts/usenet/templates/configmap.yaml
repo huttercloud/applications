@@ -62,8 +62,8 @@ metadata:
 data:
   script.sh: |
     #!/bin/sh
-    find /downloads -type f -mtime +1 -delete
-    find /incomplete-downloads -type f -mtime +1 -delete
+    find /downloads -type f -mtime +3 -delete
+    find /incomplete-downloads -type f -mtime +3 -delete
 ##
 # nzbtomedia init script
 ##
