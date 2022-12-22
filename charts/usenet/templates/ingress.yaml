@@ -62,7 +62,6 @@ metadata:
     kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   tls:
     - hosts: [{{ .Values.ingress.host }}]
@@ -71,42 +70,35 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-        - path: /(sabnzbd/.*)
+        - path: /sabnzbd
           pathType: Prefix
           backend:
             service:
               name: {{ .Release.Name }}-sabnzbd
               port:
                 number: 80
-        - path: /(radarr/.*)
+        - path: /radarr
           pathType: Prefix
           backend:
             service:
               name: {{ .Release.Name }}-radarr
               port:
                 number: 80
-        - path: /(sonarr/.*)
+        - path: /sonarr
           pathType: Prefix
           backend:
             service:
               name: {{ .Release.Name }}-sonarr
               port:
                 number: 80
-        - path: /(bazarr/.*)
+        - path: /bazarr
           pathType: Prefix
           backend:
             service:
               name: {{ .Release.Name }}-bazarr
               port:
                 number: 80
-        - path: /nzbhydra2/(.*)
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .Release.Name }}-nzbhydra2
-              port:
-                number: 80
-        - path: /(browser/.*)
+        - path: /browser
           pathType: Prefix
           backend:
             service:
@@ -114,6 +106,30 @@ spec:
               port:
                 number: 80
 
-
-
-
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-nzbhydra2
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    ginx.ingress.kubernetes.io/app-root: /nzbhydra2
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.host }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /nzbhydra2
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-nzbhydra2
+              port:
+                number: 80
