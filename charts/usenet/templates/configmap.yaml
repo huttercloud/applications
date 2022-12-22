@@ -127,23 +127,3 @@ data:
     if [ ! -f .filebrowser.json ]; then
         echo CnsKICAicG9ydCI6IDgwLAogICJiYXNlVVJMIjogIiIsCiAgImFkZHJlc3MiOiAiIiwKICAibG9nIjogInN0ZG91dCIsCiAgImRhdGFiYXNlIjogIi9kYXRhYmFzZS5kYiIsCiAgInJvb3QiOiAiL3NydiIKfQoK | base64 -d > .filebrowser.json
     fi
-
-
-    # setup specified version
-    cd /nzbtomedia/nzbToMedia
-    git fetch -a
-    git checkout {{ .Values.nzbtomedia.version }}
-
-    # copy configuration file if one exists in volume
-    if [ -f /nzbtomedia/autoProcessMedia.cfg ]; then
-        cp -f /nzbtomedia/autoProcessMedia.cfg /nzbtomedia/nzbToMedia/autoProcessMedia.cfg
-    fi
-
-    # ensure download folders arent included in backup
-    touch /incomplete-downloads/.nobackup
-    touch /downloads/.nobackup
-
-
-          - /bin/sh
-          - -c
-          - "touch /config/database.db && [ ! -f /config/.filebrowser.json ] &&
