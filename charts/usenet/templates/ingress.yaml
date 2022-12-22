@@ -98,6 +98,13 @@ spec:
               name: {{ .Release.Name }}-bazarr
               port:
                 number: 80
+        - path: /nzbhydra2
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-nzbhydra2
+              port:
+                number: 80
         - path: /browser
           pathType: Prefix
           backend:
@@ -106,30 +113,3 @@ spec:
               port:
                 number: 80
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: {{ .Release.Name }}-nzbhydra2
-  labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-  annotations:
-    kubernetes.io/ingress.class: public
-    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  tls:
-    - hosts: [{{ .Values.ingress.host }}]
-      secretName: {{ .Release.Name }}-tls
-  rules:
-    - host: {{ .Values.ingress.host }}
-      http:
-        paths:
-        - path: /nzbhydra2(/|$)(.*)
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .Release.Name }}-nzbhydra2
-              port:
-                number: 80
