@@ -5,5 +5,5 @@ storage_class_name: persistent
 
 # library nfs storage configuration
 library:
-  nfs_server: nas.hutter.cloud
+  nfs_server: 192.168.30.17
   base_path: /volume1/library

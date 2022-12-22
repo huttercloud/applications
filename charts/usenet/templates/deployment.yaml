@@ -222,8 +222,54 @@ spec:
 ##
 # radarr
 ##
-#---
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-radarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-radarr
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-radarr
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-radarr
+    spec:
+      containers:
+      - name: sabnzbd
+        image: "lscr.io/linuxserver/radarr:{{ .Values.radarr.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7878
+        # livenessProbe:
+        #   httpGet:
+        #     path: /radarr/
+        #     port: 7878
+        # readinessProbe:
+        #   httpGet:
+        #     path: /radarr/
+        #     port: 7878
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-radarr
+          mountPath: /config
+        - name: {{ .Release.Name }}-library-movies
+          mountPath: /movies
+      volumes:
+        - name: {{ .Release.Name }}-library-movies
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-movies
+        - name: {{ .Release.Name }}-radarr
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-radarr
 ##
 # sabnzbd container
 # deploy sabnzbd container
@@ -316,7 +362,54 @@ spec:
 ##
 # sonarr
 ##
-#---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-sonarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-sonarr
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-sonarr
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-sonarr
+    spec:
+      containers:
+      - name: sabnzbd
+        image: "lscr.io/linuxserver/sonarr:{{ .Values.sonarr.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8989
+        # livenessProbe:
+        #   httpGet:
+        #     path: /sonarr/
+        #     port: 8989
+        # readinessProbe:
+        #   httpGet:
+        #     path: /sonarr/
+        #     port: 8989
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-sonarr
+          mountPath: /config
+        - name: {{ .Release.Name }}-library-tv
+          mountPath: /tv
+      volumes:
+        - name: {{ .Release.Name }}-library-tv
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-tv
+        - name: {{ .Release.Name }}-sonarr
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-sonarr
 
 ##
 # file browser
