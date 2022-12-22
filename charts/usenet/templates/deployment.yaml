@@ -315,24 +315,24 @@ spec:
             path: /
             port: 80
         volumeMounts:
-        # - name: {{ .Release.Name }}-file-browser-database
-        #   mountPath: /database.db
-        # - name: {{ .Release.Name }}-file-browser-json
-        #   mountPath: /.filebrowser.json
+        - name: {{ .Release.Name }}-file-browser-database
+          mountPath: /database.db
+        - name: {{ .Release.Name }}-file-browser-json
+          mountPath: /.filebrowser.json
         - name: {{ .Release.Name }}-downloads
           mountPath: /srv
       volumes:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-downloads
-        # - name: {{ .Release.Name }}-file-browser-database
-        #   persistentVolumeClaim:
-        #     claimName: {{ .Release.Name }}-file-browser
-        #     subPath: database.db
-        # - name: {{ .Release.Name }}-file-browser-json
-        #   persistentVolumeClaim:
-        #     claimName: {{ .Release.Name }}-file-browser
-        #     subPath: .filebrowser.json
+        - name: {{ .Release.Name }}-file-browser-database
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-file-browser
+            subPath: database.db
+        - name: {{ .Release.Name }}-file-browser-json
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-file-browser
+            subPath: .filebrowser.json
         - name: {{ .Release.Name }}-file-browser
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-file-browser
