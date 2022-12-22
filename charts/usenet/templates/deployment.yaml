@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: sabnzbd
-        image: "lscr.io/linuxserver/nzbhydra2:{{ .Values.bazarr.version }}"
+        image: "lscr.io/linuxserver/bazarr:{{ .Values.bazarr.version }}"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6767
@@ -147,7 +147,6 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-nzbhydra2
 
-#---
 ##
 # oauth2 proxy for authenticated access
 ##
