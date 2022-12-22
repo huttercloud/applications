@@ -315,13 +315,20 @@ spec:
           httpGet:
             path: /
             port: 80
+        command:
+        - /filebrowser
+        - -b
+        - https://{{ .Values.ingress.host }}/browser
+        - --noauth
+        - port
+        - 9999
         volumeMounts:
-        - name: {{ .Release.Name }}-file-browser
-          mountPath: /database.db
-          subPath: database.db
-        - name: {{ .Release.Name }}-file-browser
-          mountPath: /.filebrowser.json
-          subPath: .filebrowser.json
+        # - name: {{ .Release.Name }}-file-browser
+        #   mountPath: /database.db
+        #   subPath: database.db
+        # - name: {{ .Release.Name }}-file-browser
+        #   mountPath: /.filebrowser.json
+        #   subPath: .filebrowser.json
         - name: {{ .Release.Name }}-downloads
           mountPath: /srv
 
