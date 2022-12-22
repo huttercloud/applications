@@ -109,7 +109,7 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: {{ .Release.Name }}-webdav-browser
+              name: {{ .Release.Name }}-file-browser
               port:
                 number: 80
 

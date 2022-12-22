@@ -95,7 +95,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-webdav-browser
+  name: {{ .Release.Name }}-file-browser
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
@@ -103,4 +103,4 @@ spec:
   - port: 80
     targetPort: 80
   selector:
-    app: {{ .Release.Name }}-webdav-browser
+    app: {{ .Release.Name }}-file-browser
