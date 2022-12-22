@@ -26,14 +26,14 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6767
-        # livenessProbe:
-        #   httpGet:
-        #     path: /bazarr/
-        #     port: 6767
-        # readinessProbe:
-        #   httpGet:
-        #     path: /bazarr/
-        #     port: 6767
+        livenessProbe:
+          httpGet:
+            path: /bazarr/
+            port: 6767
+        readinessProbe:
+          httpGet:
+            path: /bazarr/
+            port: 6767
         env:
         - name: TZ
           value: Europe/Zurich
@@ -247,14 +247,14 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7878
-        # livenessProbe:
-        #   httpGet:
-        #     path: /radarr/
-        #     port: 7878
-        # readinessProbe:
-        #   httpGet:
-        #     path: /radarr/
-        #     port: 7878
+        livenessProbe:
+          httpGet:
+            path: /radarr/
+            port: 7878
+        readinessProbe:
+          httpGet:
+            path: /radarr/
+            port: 7878
         env:
         - name: TZ
           value: Europe/Zurich
@@ -387,14 +387,14 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8989
-        # livenessProbe:
-        #   httpGet:
-        #     path: /sonarr/
-        #     port: 8989
-        # readinessProbe:
-        #   httpGet:
-        #     path: /sonarr/
-        #     port: 8989
+        livenessProbe:
+          httpGet:
+            path: /sonarr/
+            port: 8989
+        readinessProbe:
+          httpGet:
+            path: /sonarr/
+            port: 8989
         env:
         - name: TZ
           value: Europe/Zurich
