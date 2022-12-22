@@ -1,8 +1,59 @@
 ##
 # bazarr
 ##
-#---
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-bazarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-bazarr
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-bazarr
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-bazarr
+    spec:
+      containers:
+      - name: sabnzbd
+        image: "lscr.io/linuxserver/nzbhydra2:{{ .Values.bazarr.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6767
+        # livenessProbe:
+        #   httpGet:
+        #     path: /bazarr/
+        #     port: 6767
+        # readinessProbe:
+        #   httpGet:
+        #     path: /bazarr/
+        #     port: 6767
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-bazarr
+          mountPath: /config
+        - name: {{ .Release.Name }}-library-tv
+          mountPath: /tv
+        - name: {{ .Release.Name }}-library-movies
+          mountPath: /movies
+      volumes:
+        - name: {{ .Release.Name }}-library-tv
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-tv
+        - name: {{ .Release.Name }}-library-movies
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-movies
+        - name: {{ .Release.Name }}-bazarr
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-bazarr
 ##
 # landing page
 ##
