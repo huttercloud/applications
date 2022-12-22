@@ -96,7 +96,7 @@ data:
 
     # copy configuration file if one exists in volume
     if [ -f /nzbtomedia/autoProcessMedia.cfg ]; then
-        cp -f /nzbtomedia/nzbToMedia/autoProcessMedia.cfg
+        cp -f /nzbtomedia/autoProcessMedia.cfg /nzbtomedia/nzbToMedia/autoProcessMedia.cfg
     fi
 
     # ensure download folders arent included in backup
