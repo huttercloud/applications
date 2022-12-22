@@ -33,7 +33,6 @@ spec:
           - name: script
             configMap:
               name: {{ .Release.Name }}-sabnzbd-cleanup
-
           - name: {{ .Release.Name }}-downloads
             persistentVolumeClaim:
               claimName: {{ .Release.Name }}-downloads

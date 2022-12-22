@@ -64,3 +64,37 @@ data:
     #!/bin/sh
     find /downloads -type f -mtime +1 -delete
     find /incomplete-downloads -type f -mtime +1 -delete
+##
+# nzbtomedia init script
+##
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-nzbtomedia-init
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+data:
+  script.sh: |
+    #!/bin/sh
+
+    # install and configure git
+    apk add --no-cache git
+    echo "autoProcessMedia.cfg" > /.gitignore
+    git config --global core.excludesfile /.gitignore
+
+    # check if there is already a checkout for nzbToMedia
+    if [ ! -d /nzbtomedia/nzbToMedia ]; then
+        cd /nzbtomedia
+        git clone https://github.com/clinton-hall/nzbToMedia.git
+    fi
+
+    # setup specified version
+    cd /nzbtomedia/nzbToMedia
+    git fetch -a
+    git checkout {{ .Values.nzbtomedia.version }}
+
+    # copy configuration file if one exists in volume
+    if [ -f /nzbtomedia/autoProcessMedia.cfg ]; then
+        cp -f /nzbtomedia/nzbToMedia/autoProcessMedia.cfg
+    fi

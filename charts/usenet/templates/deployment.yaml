@@ -147,6 +147,17 @@ spec:
       labels:
         app: {{ .Release.Name }}-sabnzbd
     spec:
+      initContainers:
+      - name: nzbtomedia
+        image: alpine
+        command:
+          - /bin/sh
+          - /script/script.sh
+        volumeMounts:
+        - name: {{ .Release.Name }}-nzbtomedia-init
+          mountPath: /script
+        - name: {{ .Release.Name }}-nzbtomedia
+          mountPath: /nzbtomedia
       containers:
       - name: sabnzbd
         image: "lscr.io/linuxserver/sabnzbd:{{ .Values.sabnzbd.version }}"
@@ -171,6 +182,9 @@ spec:
           mountPath: /downloads
         - name: {{ .Release.Name }}-incomplete-downloads
           mountPath: /incomplete-downloads
+        - name: {{ .Release.Name }}-nzbtomedia
+          mountPath: /nzbToMedia
+          subPath: nzbToMedia
       volumes:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
@@ -181,6 +195,12 @@ spec:
         - name: {{ .Release.Name }}-sabnzbd
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-sabnzbd
+        - name: {{ .Release.Name }}-nzbtomedia
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-nzbtomedia
+        - name: {{ .Release.Name }}-nzbtomedia-init
+          configMap:
+            name: {{ .Release.Name }}-nzbtomedia-init
 
 ##
 # sonarr
