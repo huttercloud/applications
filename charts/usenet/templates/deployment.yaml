@@ -296,7 +296,7 @@ spec:
         command:
           - /bin/sh
           - -c
-          - "[ ! -f /config/database.db ] && touch /config/database.db && [ ! -f /config/.filebrowser.json ] && touch /config/.filebrowser.json"
+          - "set +x; [ ! -f /config/database.db ] && touch /config/database.db && [ ! -f /config/.filebrowser.json ] && touch /config/.filebrowser.json"
         volumeMounts:
         - name: {{ .Release.Name }}-file-browser
           mountPath: /config
