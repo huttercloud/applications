@@ -315,10 +315,10 @@ spec:
             path: /
             port: 80
         volumeMounts:
-        - name: {{ .Release.Name }}-file-browser-database
+        - name: {{ .Release.Name }}-file-browser
           mountPath: /database.db
           subPath: database.db
-        - name: {{ .Release.Name }}-file-browser-json
+        - name: {{ .Release.Name }}-file-browser
           mountPath: /.filebrowser.json
         - name: {{ .Release.Name }}-downloads
           mountPath: /srv
