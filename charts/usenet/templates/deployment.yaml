@@ -47,6 +47,53 @@ spec:
 ##
 # nzbhydra
 ##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-nzbhydra2
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-nzbhydra2
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-nzbhydra2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-nzbhydra2
+    spec:
+      containers:
+      - name: sabnzbd
+        image: "lscr.io/linuxserver/nzbhydra2:{{ .Values.nzbhydra2.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5076
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5076
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5076
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-nzbhydra2
+          mountPath: /config
+        - name: {{ .Release.Name }}-downloads
+          mountPath: /downloads
+      volumes:
+        - name: {{ .Release.Name }}-downloads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads
+        - name: {{ .Release.Name }}-nzbhydra2
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-nzbhydra2
+
 #---
 ##
 # oauth2 proxy for authenticated access

@@ -66,7 +66,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-nzbhydra
+  name: {{ .Release.Name }}-nzbhydra2
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:

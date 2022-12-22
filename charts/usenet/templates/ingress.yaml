@@ -24,7 +24,7 @@ spec:
               port:
                 number: 80
 
----                
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -51,7 +51,7 @@ spec:
               name: {{ .Release.Name }}-oauth2-proxy
               port:
                 number: 80
----                
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -98,11 +98,11 @@ spec:
               name: {{ .Release.Name }}-bazarr
               port:
                 number: 80
-        - path: /nzbhydra
+        - path: /nzbhydra2
           pathType: Prefix
           backend:
             service:
-              name: {{ .Release.Name }}-nzbhydra
+              name: {{ .Release.Name }}-nzbhydra2
               port:
                 number: 80
         - path: /browser

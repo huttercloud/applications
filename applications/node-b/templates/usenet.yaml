@@ -20,6 +20,8 @@ spec:
           value: 12.1.10
         - name: oauth2proxy.version
           value: v7.4.0
+        - name: nzbhydra2.version
+          value: 4.7.4
 
   destination:
     server: {{ .Values.spec.destination.server }}

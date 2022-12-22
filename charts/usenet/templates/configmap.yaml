@@ -39,7 +39,7 @@ data:
     </p>
     <h3>manual search and download</h3>
     <p>
-    <a href="https://{{ .Values.ingress.host }}/nzbhydra/">nzbhydra - manual usenet search</a></br>
+    <a href="https://{{ .Values.ingress.host }}/nzbhydra2/">nzbhydra2 - manual usenet search</a></br>
     <a href="https://{{ .Values.ingress.host }}/browser/">browse downloaded items and plex library</a></br>
     </p>
     <h3>downloader</h3>
