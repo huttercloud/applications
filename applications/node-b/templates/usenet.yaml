@@ -16,22 +16,15 @@ spec:
         - name: ingress.host
           value: usenet.hutter.cloud
         # versions for usenet services
-        - name: sabnzbd.version
-          value: 3.7.1
-        - name: nzbtomedia.version
-          value: 12.1.10
-        - name: oauth2proxy.version
-          value: v7.4.0
-        - name: nzbhydra2.version
-          value: 4.7.6
-        - name: filebrowser.version
-          value: v2.23.0
-        - name: sonarr.version
-          value: 3.0.9
-        - name: radarr.version
-          value: 4.2.4
-        - name: bazarr.version
-          value: 1.1.3
+        # values defined as single line to allow github action to auto update versions
+        - { name: sabnzbd.version, value: 3.7.1 }
+        - { name: nzbtomedia.version, value: 12.1.10 }
+        - { name: oauth2proxy.version, value: v7.4.0 }
+        - { name: nzbhydra2.version, value: 4.7.6 }
+        - { name: filebrowser.version, value: v2.23.0 }
+        - { name: sonarr.version, value: 3.0.9 }
+        - { name: radarr.version, value: 4.2.4 }
+        - { name: bazarr.version, value: 1.1.3 }
 
   destination:
     server: {{ .Values.spec.destination.server }}
