@@ -2,6 +2,8 @@
 oauth2:
   enabled: true
 
+# single line oauth2 proxy version for update-versions script
+oauth2.proxy.version: "v7.4.0"
 
 prometheus:
   prometheus-node-exporter:
