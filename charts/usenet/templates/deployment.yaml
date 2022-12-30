@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-bazarr
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -233,7 +233,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-radarr
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -373,7 +373,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-sonarr
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
