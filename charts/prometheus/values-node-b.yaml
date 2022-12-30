@@ -1,4 +1,11 @@
+
+oauth2:
+  enabled: true
+
+
 prometheus:
+  prometheus-node-exporter:
+    enabled: false
   server:
     baseUrl: prometheus.hutter.cloud
     ingress:
