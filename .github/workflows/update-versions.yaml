@@ -57,7 +57,11 @@ jobs:
             --replace '\s*?-\s{\sname:\s+filebrowser.version,\svalue:\s(.*)\s}' FILEBROWSER \
             --replace '\s*?-\s{\sname:\s+sonarr.version,\svalue:\s(.*)\s}' SONARR \
             --replace '\s*?-\s{\sname:\s+radarr.version,\svalue:\s(.*)\s}' RADARR \
-            --replace '\s*?-\s{\sname:\s+bazarr.version,\svalue:\s(.*)\s}' BAZARR \
+            --replace '\s*?-\s{\sname:\s+bazarr.version,\svalue:\s(.*)\s}' BAZARR
+
+          python3 update-versions/update-versions.py \
+            --file applications/applications/node-b/templates/prometheus.yaml \
+            --replace '\s*?targetRevision:\s(.*)' PROMETHEUS
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4
         with:
