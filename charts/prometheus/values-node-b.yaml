@@ -1,0 +1,19 @@
+prometheus:
+  server:
+    baseUrl: prometheus.hutter.cloud
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+        kubernetes.io/ingress.class: public
+      hosts:
+        - prometheus.hutter.cloud
+      tls:
+        - secretName: prometheus-server-tls
+          hosts:
+            - prometheus.hutter.cloud
+
+    persistentVolume:
+      accessMOdes:
+        - ReadWriteMany
+      storageClass: persistent-2
