@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: prometheus
       valueFiles:
-        - prometheus-values.yaml
+        - value-files/prometheus.yaml
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: default
