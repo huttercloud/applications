@@ -67,5 +67,46 @@ spec:
         ports:
         - containerPort: 4180
           protocol: TCP
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-oauth2-proxy
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    app: {{ .Release.Name }}-oauth2-proxy
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-oauth2
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    # allow bigger buffer for proxied requests, required for oauth2 oidc to work
+    # properly
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+    kubernetes.io/ingress.class: public
+spec:
+  tls:
+    - hosts: {{ .Values.prometheus.server.ingress.tls.hosts }}
+      secretName: {{ .Values.prometheus.server.ingress.tls.secretName }}
+  rules:
+    - host: {{ .Values.prometheus.server.ingress.baseUrl }}
+      http:
+        paths:
+        - path: /oauth2
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-oauth2-proxy
+              port:
+                number: 80
 {{- end }}
