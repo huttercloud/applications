@@ -1,4 +1,6 @@
 
+externalName:
+  enabled: true
 
 oauth2:
   enabled: true
