@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: grafana
       valueFiles:
-        - values-node-b.yaml
+        - {{ .Values.spec.values }}
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: default

@@ -1,0 +1,21 @@
+
+
+oauth2:
+  enabled: false
+  # single line oauth2 proxy version for update-versions script
+  proxy: { version: "v7.4.0" }
+
+prometheus:
+  prometheus-node-exporter:
+    enabled: true
+  alertmanager:
+    enabled: false
+  kube-state-metrics:
+    enabled: false
+  prometheus-pushgateway:
+    enabled: false
+  server:
+    ingress:
+      enabled: false
+    persistentVolume:
+      enabled: false

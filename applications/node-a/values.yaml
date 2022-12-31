@@ -1,5 +1,6 @@
 # Default values for node-a.
 
 spec:
+  values: values-node-a.yaml
   destination:
     server: https://node-a.hutter.cloud:16443
