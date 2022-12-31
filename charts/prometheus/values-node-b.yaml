@@ -45,14 +45,14 @@ prometheus:
     - job_name: "node-c-node-exporter"
       metrics_path: /metrics
       scheme: http
-      honor_lables: true
+      honor_labels: true
       static_configs:
         - targets:
           - node-c.hutter.cloud:9100
     - job_name: "node-a-kubernetes"
       metrics_path: /federate
       scheme: http
-      honor_lables: true
+      honor_labels: true
       scrape_interval: 15s
       params:
         'match[]':
