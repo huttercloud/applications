@@ -6,6 +6,7 @@ oauth2:
   proxy: { version: "v7.4.0" }
 
 prometheus:
+  # enable all dependencies
   prometheus-node-exporter:
     enabled: true
   alertmanager:
@@ -14,6 +15,7 @@ prometheus:
     enabled: true
   prometheus-pushgateway:
     enabled: true
+  # setup prometheus server with persistence and ingress
   server:
     baseUrl: prometheus.hutter.cloud
     ingress:
@@ -29,8 +31,14 @@ prometheus:
         - secretName: prometheus-server-tls
           hosts:
             - prometheus.hutter.cloud
-
     persistentVolume:
       accessMOdes:
         - ReadWriteMany
       storageClass: persistent-2
+  # add scraping targets for nodes outside the cluster
+  extraScrapeConfigs:
+    - job_name: "node-c-node-exporter"
+      metrics_path: /metrics
+      static_configs:
+        - targets:
+          - http://node-c.hutter.cloud:9100
