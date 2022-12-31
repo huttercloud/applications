@@ -1,6 +1,7 @@
 # Default values for node-b.
 
 spec:
-  values: values-node-b.yaml
+  applicationPrefix: node-b
+  valuesFile: values-node-b.yaml
   destination:
     server: https://node-b.hutter.cloud:16443

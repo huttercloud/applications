@@ -1,6 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  # no prefix added here as pvcs with configuration are already in place!
   name: usenet
   namespace: default
 spec:

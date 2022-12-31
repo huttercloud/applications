@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-name-cronjob
+  name: {{ .Values.spec.applicationPrefix }}-external-name-cronjob
   namespace: default
 spec:
   project: default

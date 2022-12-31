@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: {{ .Values.spec.applicationPrefix }}-prometheus
   namespace: default
 spec:
   project: default
@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: prometheus
       valueFiles:
-        - {{ .Values.spec.values }}
+        - {{ .Values.spec.valuesFile }}
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: default
