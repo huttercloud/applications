@@ -7,6 +7,9 @@ oauth2:
   # single line oauth2 proxy version for update-versions script
   proxy: { version: "v7.4.0" }
 
+federateService:
+  enabled: false
+
 prometheus:
   # enable all dependencies
   prometheus-node-exporter:
@@ -46,3 +49,18 @@ prometheus:
       static_configs:
         - targets:
           - node-c.hutter.cloud:9100
+    - job_name: "node-a-kubernetes"
+      metrics_path: /federate
+      scheme: http
+      honor_lables: true
+      scrape_interval: 15s
+      params:
+        'match[]':
+          - '{job="kubernetes-apiserver"}'
+          - '{job="kubernetes-nodes"}'
+          - '{job="kubernetes-nodes=cadvisor"}'
+          - '{job="kubernetes-pods"}'
+          - '{job="kubernetes-service-endpoints"}'
+      static_configs:
+        - targets:
+          - node-a.hutter.cloud:9090

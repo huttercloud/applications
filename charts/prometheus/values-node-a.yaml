@@ -7,6 +7,10 @@ oauth2:
   # single line oauth2 proxy version for update-versions script
   proxy: { version: "v7.4.0" }
 
+# add tcp:9090 as node port to allow access to prometheus server from outside the node
+federateService:
+  enabled: true
+
 prometheus:
   prometheus-node-exporter:
     enabled: true
