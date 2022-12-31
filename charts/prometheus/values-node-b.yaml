@@ -41,4 +41,4 @@ prometheus:
       metrics_path: /metrics
       static_configs:
         - targets:
-          - http://node-c.hutter.cloud:9100
+          - node-c.hutter.cloud:9100
