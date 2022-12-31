@@ -64,8 +64,8 @@ jobs:
             --replace '\s*?version:\s\"(.*)\"' PROMETHEUS
 
           python3 update-versions/update-versions.py \
-            --file applications/charts/prometheus/values-node-b \
-            --replace '\s*?oauth2.proxy.version:\s\"(.*)\"' OAUTH2PROXY
+            --file applications/charts/prometheus/values-node-b.yaml \
+            --replace '\s*?proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4
         with:

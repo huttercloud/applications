@@ -96,8 +96,8 @@ metadata:
     kubernetes.io/ingress.class: public
 spec:
   tls:
-    - hosts: {{ .Values.prometheus.server.ingress.tls.hosts }}
-      secretName: {{ .Values.prometheus.server.ingress.tls.secretName }}
+    - hosts: {{ (index .Values.prometheus.server.ingress.tls 0).hosts }}
+      secretName: {{ (index .Values.prometheus.server.ingress.tls 0).secretName }}
   rules:
     - host: {{ .Values.prometheus.server.ingress.baseUrl }}
       http:
