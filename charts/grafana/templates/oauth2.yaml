@@ -99,7 +99,7 @@ spec:
     - hosts: {{ (index .Values.grafana.ingress.tls 0).hosts }}
       secretName: {{ (index .Values.grafana.ingress.tls 0).secretName }}
   rules:
-    - host: {{ (index .Values.grafana.hosts 0).hosts }}
+    - host: {{ (index .Values.grafana.ingress.hosts 0) }}
       http:
         paths:
         - path: /oauth2
