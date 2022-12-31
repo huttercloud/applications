@@ -99,7 +99,7 @@ spec:
     - hosts: {{ (index .Values.prometheus.server.ingress.tls 0).hosts }}
       secretName: {{ (index .Values.prometheus.server.ingress.tls 0).secretName }}
   rules:
-    - host: {{ .Values.prometheus.server.ingress.baseUrl }}
+    - host: {{ .Values.prometheus.server.baseUrl }}
       http:
         paths:
         - path: /oauth2
