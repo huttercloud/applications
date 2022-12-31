@@ -1,0 +1,44 @@
+
+
+oauth2:
+  enabled: true
+  # single line oauth2 proxy version for update-versions script
+  proxy: { version: "v7.4.0" }
+
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+      kubernetes.io/ingress.class: public
+      nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+    hosts:
+      - grafana.hutter.cloud
+    tls:
+      - secretName: grafana-server-tls
+        hosts:
+          - grafana.hutter.cloud
+
+  persistence:
+    enabled: true
+    storageClassName: persistent-2
+    accessModes:
+      - ReadWriteMany
+
+  admin:
+    existingSecret: "grafana-admin-credentials"
+
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          url: http://prometheus-server
+          access: proxy
+          isDefault: true
+
+  grafana.ini:
+    auth.anonymous:
+      enabled: true

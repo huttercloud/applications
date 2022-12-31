@@ -39,6 +39,8 @@ prometheus:
   extraScrapeConfigs: |
     - job_name: "node-c-node-exporter"
       metrics_path: /metrics
+      scheme: http
+      honor_lables: true
       static_configs:
         - targets:
           - node-c.hutter.cloud:9100

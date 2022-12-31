@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: default
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    repoURL: git@github.com:huttercloud/applications.git
+    targetRevision: HEAD
+    path: charts/grafana
+    helm:
+      releaseName: grafana
+      valueFiles:
+        - values-node-b.yaml
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: default
