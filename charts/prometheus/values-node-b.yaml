@@ -36,7 +36,7 @@ prometheus:
         - ReadWriteMany
       storageClass: persistent-2
   # add scraping targets for nodes outside the cluster
-  extraScrapeConfigs:
+  extraScrapeConfigs: |
     - job_name: "node-c-node-exporter"
       metrics_path: /metrics
       static_configs:
