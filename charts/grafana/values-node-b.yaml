@@ -44,6 +44,13 @@ grafana:
           url: http://prometheus-server
           access: proxy
           isDefault: true
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki-read:3100
+          jsonData:
+          maxLines: 1000
+
 
   grafana.ini:
     auth.anonymous:
