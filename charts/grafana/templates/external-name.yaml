@@ -1,6 +1,6 @@
 # create externalname service to allow ext-dns
 # to create a cname record
-
+{{- if .Values.externalName.enabled -}}
 ---
 kind: Service
 apiVersion: v1
@@ -14,3 +14,4 @@ metadata:
 spec:
   type: ExternalName
   externalName: infra.hutter.cloud
+{{- end }}

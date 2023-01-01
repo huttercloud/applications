@@ -5,6 +5,12 @@ oauth2:
   # single line oauth2 proxy version for update-versions script
   proxy: { version: "v7.4.0" }
 
+externalName:
+  enabled: true
+
+externalSecret:
+  enabled: true
+
 grafana:
   ingress:
     enabled: true
