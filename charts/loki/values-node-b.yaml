@@ -14,6 +14,7 @@ loki:
       grafanaAgent:
         installOperator: false
   loki:
+    # enable single binary deployment (one loki pod doin everyghin!)
     commonConfig:
       replication_factor: 1
     storage:
@@ -22,36 +23,26 @@ loki:
     monitoring:
       selfMonitoring:
         enabled: false
-  # no clue how to enable single binary mode...
-  # so lets set the persistency for all node types
-  read:
-    replicas: 1
-    persistence:
-      storageClass: persistent-2
-    affinity: ""
-  write:
-    replicas: 1
-    persistence:
-      storageClass: persistent-2
-    affinity: ""
   singleBinary:
     persistence:
       storageClass: persistent-2
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+      kubernetes.io/ingress.class: public
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: loki-gateway-basic-auth
+      nginx.ingress.kubernetes.io/auth-secret-type: auth-file
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        proxy_set_header X-Scope-OrgID $remote_user;
+    hosts:
+      - loki.hutter.cloud
+    tls:
+      - secretName: loki-gateway-tls
+        hosts:
+          - loki.hutter.cloud
+  # disable gateway - even though it's not really used
+  # in single bin deployments
   gateway:
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-        kubernetes.io/ingress.class: public
-      hosts:
-        - host: loki.hutter.cloud
-          paths:
-            - path: /
-      tls:
-        - secretName: loki-gateway-tls
-          hosts:
-            - loki.hutter.cloud
-      basicAuth:
-        enabled: true
-        existingSecret: loki-gateway-basic-auth
-
+    enabled: false
