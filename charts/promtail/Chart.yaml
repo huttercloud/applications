@@ -1,0 +1,10 @@
+apiVersion: v2
+name: prometheus
+description: install promtail helm chart as dependency
+type: application
+version: "6.7.4"
+
+dependencies:
+- name: promtail
+  version: "6.7.4"
+  repository: "https://grafana.github.io/helm-charts"

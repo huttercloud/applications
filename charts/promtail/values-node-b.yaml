@@ -1,0 +1,4 @@
+promtail:
+  config:
+    clients:
+      - http://loki:3001/loki/api/v1/push
