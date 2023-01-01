@@ -37,7 +37,6 @@ loki:
   singleBinary:
     persistence:
       storageClass: persistent-2
-    affinity: ""
   gateway:
     ingress:
       enabled: true
