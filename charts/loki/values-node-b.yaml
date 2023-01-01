@@ -26,6 +26,10 @@ loki:
     monitoring:
       selfMonitoring:
         enabled: false
+    compactor:
+      retention_enabled: true
+    limits_config:
+      retention_period: 10d
   singleBinary:
     persistence:
       storageClass: persistent-2
