@@ -22,19 +22,19 @@ loki:
     monitoring:
       selfMonitoring:
         enabled: false
-    # no clue how to enable single binary mode...
-    # so lets set the persistency for all node types
-    read:
-      replicas: 1
-      persistence:
-        storageClass: persistent-2
-    write:
-      replicas: 1
-      persistence:
-        storageClass: persistent-2
-    singleBinary:
-      persistence:
-        storageClass: persistent-2
+  # no clue how to enable single binary mode...
+  # so lets set the persistency for all node types
+  read:
+    replicas: 1
+    persistence:
+    storageClass: persistent-2
+  write:
+    replicas: 1
+    persistence:
+    storageClass: persistent-2
+  singleBinary:
+    persistence:
+    storageClass: persistent-2
     gateway:
       ingress:
         enabled: true
