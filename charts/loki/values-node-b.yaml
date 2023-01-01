@@ -27,14 +27,14 @@ loki:
   read:
     replicas: 1
     persistence:
-    storageClass: persistent-2
+      storageClass: persistent-2
   write:
     replicas: 1
     persistence:
-    storageClass: persistent-2
+      storageClass: persistent-2
   singleBinary:
     persistence:
-    storageClass: persistent-2
+      storageClass: persistent-2
     gateway:
       ingress:
         enabled: true
