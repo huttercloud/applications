@@ -1,0 +1,10 @@
+apiVersion: v2
+name: prometheus
+description: install prometheus helm chart as dependency
+type: application
+version: "3.8.0"
+
+dependencies:
+- name: loki
+  version: "3.8.0"
+  repository: "https://grafana.github.io/helm-charts"

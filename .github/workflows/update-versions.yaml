@@ -74,6 +74,10 @@ jobs:
           python3 update-versions/update-versions.py \
             --file applications/charts/grafana/values-node-b.yaml \
             --replace '\s*?proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
+
+          python3 update-versions/update-versions.py \
+            --file applications/charts/loki/Chart.yaml \
+            --replace '\s*?version:\s\"(.*)\"' LOKI
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4
         with:

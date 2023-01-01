@@ -1,0 +1,45 @@
+
+externalName:
+  enabled: true
+
+externalSecret:
+  enabled: true
+
+loki:
+  # disable chart dependencies
+  minio:
+    enabled: false
+  monitoring:
+    selfMonitoring:
+      grafanaAgent:
+        installOperator: false
+  loki:
+    commonConfig:
+      replication_factor: 1
+    commonStorageConfig:
+      type: filesystem
+    auth_enabled: false
+    monitoring:
+      selfMonitoring:
+        enabled: false
+    singleBinary:
+      persistence:
+        storageClass: persistent-2
+    gateway:
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-dns
+          kubernetes.io/ingress.class: public
+        hosts:
+          - host: loki.hutter.cloud
+            paths:
+              - path: /
+        tls:
+          - secretName: loki-gateway-tls
+            hosts:
+              - loki.hutter.cloud
+        basicAuth:
+          enabled: true
+          existingSecret: loki-gateway-basic-auth
+
