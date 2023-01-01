@@ -37,7 +37,6 @@ loki:
       nginx.ingress.kubernetes.io/satisfy: "any"
       nginx.ingress.kubernetes.io/configuration-snippet: |-
         allow 192.168.30.0/24;
-        deny all;
     hosts:
       - loki.hutter.cloud
     tls:
