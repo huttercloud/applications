@@ -28,13 +28,16 @@ loki:
     replicas: 1
     persistence:
       storageClass: persistent-2
+    affinity: ""
   write:
     replicas: 1
     persistence:
       storageClass: persistent-2
+    affinity: ""
   singleBinary:
     persistence:
       storageClass: persistent-2
+    affinity: ""
   gateway:
     ingress:
       enabled: true
