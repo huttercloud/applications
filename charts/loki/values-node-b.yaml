@@ -16,7 +16,7 @@ loki:
   loki:
     commonConfig:
       replication_factor: 1
-    commonStorageConfig:
+    storage:
       type: filesystem
     auth_enabled: false
     monitoring:
