@@ -35,21 +35,21 @@ loki:
   singleBinary:
     persistence:
       storageClass: persistent-2
-    gateway:
-      ingress:
+  gateway:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+        kubernetes.io/ingress.class: public
+      hosts:
+        - host: loki.hutter.cloud
+          paths:
+            - path: /
+      tls:
+        - secretName: loki-gateway-tls
+          hosts:
+            - loki.hutter.cloud
+      basicAuth:
         enabled: true
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-dns
-          kubernetes.io/ingress.class: public
-        hosts:
-          - host: loki.hutter.cloud
-            paths:
-              - path: /
-        tls:
-          - secretName: loki-gateway-tls
-            hosts:
-              - loki.hutter.cloud
-        basicAuth:
-          enabled: true
-          existingSecret: loki-gateway-basic-auth
+        existingSecret: loki-gateway-basic-auth
 
