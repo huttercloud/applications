@@ -1,0 +1,21 @@
+{{- if .Values.lanAccess.enabled -}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-external-access
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 3100
+    protocol: TCP
+    targetPort: 3100
+    nodePort: 3100
+  selector:
+    instance: loki
+    component: single-binary
+    name: {{ .Release.Name }}
+{{- end }}

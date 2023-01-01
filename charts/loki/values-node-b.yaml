@@ -1,8 +1,11 @@
 
 externalName:
-  enabled: true
+  enabled: false
 
 externalSecret:
+  enabled: false
+
+lanAccess:
   enabled: true
 
 loki:
@@ -26,8 +29,9 @@ loki:
   singleBinary:
     persistence:
       storageClass: persistent-2
+  # lets keep it simple, disable ingress, add nodeport service and be done with it
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
       kubernetes.io/ingress.class: public
