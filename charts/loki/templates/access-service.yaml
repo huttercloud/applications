@@ -12,7 +12,7 @@ spec:
   - name: http
     port: 3100
     protocol: TCP
-    targetPort: 3100
+    targetPort: http-metricss
     nodePort: 3100
   selector:
     instance: loki
