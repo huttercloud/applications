@@ -49,7 +49,7 @@ grafana:
           access: proxy
           url: http://loki-read:3100
           jsonData:
-          maxLines: 1000
+            maxLines: 1000
 
 
   grafana.ini:
