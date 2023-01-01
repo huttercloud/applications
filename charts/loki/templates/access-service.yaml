@@ -12,10 +12,10 @@ spec:
   - name: http
     port: 3100
     protocol: TCP
-    targetPort: http-metricss
+    targetPort: 3100
     nodePort: 3100
   selector:
-    instance: loki
-    component: single-binary
-    name: {{ .Release.Name }}
+    app.kubernetes.io/instance: loki
+    app.kubernetes.io/component: single-binary
+    app.kubernetes.io/name: {{ .Release.Name }}
 {{- end }}
