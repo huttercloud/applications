@@ -25,11 +25,11 @@ loki:
   # no clue how to enable single binary mode...
   # so lets set the persistency for all node types
   read:
-    replicas: 0
+    replicas: 1
     persistence:
       storageClass: persistent-2
   write:
-    replicas: 0
+    replicas: 1
     persistence:
       storageClass: persistent-2
   singleBinary:
