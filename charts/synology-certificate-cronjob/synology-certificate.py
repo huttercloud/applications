@@ -105,7 +105,7 @@ cp -a /usr/syno/etc/certificate/system/default/*.pem /usr/local/etc/certificate/
 # restart services
 echo restart services
 /usr/syno/bin/synosystemctl restart nginx
-/usr/syno/bin/synosystemctl restart nmbd
+#/usr/syno/bin/synosystemctl restart nmbd
 /usr/syno/bin/synosystemctl restart avahi
 
 # remove script
