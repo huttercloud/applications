@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.spec.applicationPrefix }}-synology-public-dns
+  namespace: default
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    repoURL: git@github.com:huttercloud/applications.git
+    targetRevision: HEAD
+    path: charts/synology-public-dns
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: default
