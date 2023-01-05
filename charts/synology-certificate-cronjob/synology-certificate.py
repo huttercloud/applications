@@ -65,7 +65,8 @@ def upload_certificate_script_to_synology(certificates: Dict[str, x509.Certifica
     root = certificates['root'].public_bytes(encoding=Encoding.PEM).decode('UTF-8').strip()
     privkey = private_key.strip()
 
-
+    # thanks to https://gist.github.com/catchdave/69854624a21ac75194706ec20ca61327
+    # and https://github.com/looran/synoadm
     bash_script = f'''
 set -e
 
