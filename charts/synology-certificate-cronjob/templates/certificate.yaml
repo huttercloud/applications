@@ -6,7 +6,7 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   dnsNames:
-    - nas.hutter.cloud
+    - synology.hutter.cloud
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-dns
