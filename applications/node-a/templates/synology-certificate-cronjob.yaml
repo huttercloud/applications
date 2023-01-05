@@ -1,16 +1,22 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: {{ .Values.spec.applicationPrefix }}-synology-certificate-cronjob
-  namespace: default
-spec:
-  project: default
-  syncPolicy:
-    automated: {}
-  source:
-    repoURL: git@github.com:huttercloud/applications.git
-    targetRevision: HEAD
-    path: charts/synology-certificate-cronjob
-  destination:
-    server: {{ .Values.spec.destination.server }}
-    namespace: default
+#
+# disabled the cronjob - latest drive client release doesnt include the
+# letsencrypt root ca and therefore always marks the certificate as untrusted.
+# using a namecheap certificate now
+#
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: {{ .Values.spec.applicationPrefix }}-synology-certificate-cronjob
+#   namespace: default
+# spec:
+#   project: default
+#   syncPolicy:
+#     automated: {}
+#   source:
+#     repoURL: git@github.com:huttercloud/applications.git
+#     targetRevision: HEAD
+#     path: charts/synology-certificate-cronjob
+#   destination:
+#     server: {{ .Values.spec.destination.server }}
+#     namespace: default
