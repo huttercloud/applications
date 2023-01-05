@@ -69,7 +69,8 @@ def upload_certificate_script_to_synology(certificates: Dict[str, x509.Certifica
     bash_script = f'''
 set -e
 
-# creating default certificate repository (dsm 7)
+# creating default certificate repository
+echo creating _archive directory
 [ ! -d /usr/syno/etc/certificate/_archive/letsen ] && mkdir /usr/syno/etc/certificate/_archive/letsen
 [ ! -f /usr/syno/etc/certificate/_archive/DEFAULT.bak ] && cp -a /usr/syno/etc/certificate/_archive/DEFAULT /usr/syno/etc/certificate/_archive/DEFAULT.bak
 echo letsen > /usr/syno/etc/certificate/_archive/DEFAULT
