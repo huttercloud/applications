@@ -69,25 +69,30 @@ def upload_certificate_script_to_synology(certificates: Dict[str, x509.Certifica
     bash_script = f'''
 set -e
 
+# creating default certificate repository (dsm 7)
+[ ! -d /usr/syno/etc/certificate/_archive/letsen ] && mkdir /usr/syno/etc/certificate/_archive/letsen
+[ ! -f /usr/syno/etc/certificate/_archive/DEFAULT.bak ] && cp -a /usr/syno/etc/certificate/_archive/DEFAULT /usr/syno/etc/certificate/_archive/DEFAULT.bak
+echo letsen > /usr/syno/etc/certificate/_archive/DEFAULT
+
 # copy certificate and key
 echo copy privkey
-cat << EOF > /usr/syno/etc/certificate/system/default/privkey.pem
+cat << EOF > /usr/syno/etc/certificate/_archive/letsen/privkey.pem
 {privkey}
 EOF
 
 echo copy cert
-cat << EOF > /usr/syno/etc/certificate/system/default/cert.pem
+cat << EOF > /usr/syno/etc/certificate/_archive/letsen/cert.pem
 {cert}
 EOF
 
 echo copy chain
-cat << EOF > /usr/syno/etc/certificate/system/default/chain.pem
+cat << EOF > /usr/syno/etc/certificate/_archive/letsent/chain.pem
 {intermediate}
 {root}
 EOF
 
 echo copy fullchain
-cat << EOF > /usr/syno/etc/certificate/system/default/fullchain.pem
+cat << EOF > /usr/syno/etc/certificate/_archive/letsen/fullchain.pem
 {cert}
 {intermediate}
 {root}
@@ -95,12 +100,12 @@ EOF
 
 # ensure proper permissions
 echo set certificate permissions
-chown root:root /usr/syno/etc/certificate/system/default/*.pem
-chmod 0400 /usr/syno/etc/certificate/system/default/*.pem
+chown root:root /usr/syno/etc/certificate/_archive/letsen/*.pem
+chmod 0400 /usr/syno/etc/certificate/_archive/letsen/*.pem
 
-# setup synology drive certificate
-echo copy certs for synology drive
-cp -a /usr/syno/etc/certificate/system/default/*.pem /usr/local/etc/certificate/SynologyDrive/SynologyDrive
+# # setup synology drive certificate
+# echo copy certs for synology drive
+# cp -a /usr/syno/etc/certificate/system/default/*.pem /usr/local/etc/certificate/SynologyDrive/SynologyDrive
 
 # restart services
 echo restart services
