@@ -2,7 +2,7 @@
 
 """
     retrieve the certificate stored as a kubernetes secret (mnanaged by cert-manager)
-    retrieve the certificate from nas.hutter.cloud
+    retrieve the certificate synology.hutter.cloud
     compare timestamps and if close to expiry replace the certificate on the synology nas
 """
 
@@ -19,7 +19,7 @@ import re
 import io
 
 
-def get_certificate_from_synology(host: str = 'nas.hutter.cloud', port: int = 5001) -> x509.Certificate:
+def get_certificate_from_synology(host: str = 'synology.hutter.cloud', port: int = 5001) -> x509.Certificate:
     """
         retrieve the certificate from the synology nas
         thanks to: https://stackoverflow.com/questions/71139519/python-how-to-get-expired-ssl-cert-date
@@ -47,7 +47,7 @@ def get_certificate_from_local_secret(certificate_file: str = '/certificate/tls.
 
     s = re.compile("(-----BEGIN CERTIFICATE-----[\w\W]*?-----END CERTIFICATE-----)")
     pem_certificates = s.findall(certificate_data)
-    
+
     certificates = dict()
     certificates['cert'] = x509.load_pem_x509_certificate(pem_certificates[0].encode('UTF-8'))
     certificates['intermediate'] = x509.load_pem_x509_certificate(pem_certificates[1].encode('UTF-8'))
@@ -55,7 +55,7 @@ def get_certificate_from_local_secret(certificate_file: str = '/certificate/tls.
 
     return (certificates, key_data)
 
-def upload_certificate_script_to_synology(certificates: Dict[str, x509.Certificate], private_key: str, host: str = 'nas.hutter.cloud', username: str = 'admin', ssh_key_file: str = '/ssh-key/private-key', script_path: str = '/tmp/synology-certificate.sh'):
+def upload_certificate_script_to_synology(certificates: Dict[str, x509.Certificate], private_key: str, host: str = 'synology.hutter.cloud', username: str = 'synadmin', ssh_key_file: str = '/ssh-key/private-key', script_path: str = '/tmp/synology-certificate.sh'):
     """
         render and upload a bash script to the synology nas
     """
@@ -125,7 +125,7 @@ rm -- "${{0}}"
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh_client.connect(hostname=host, username=username, pkey=ssh_private_key)
 
-    # upload file 
+    # upload file
     scp_client = scp.SCPClient(ssh_client.get_transport())
     scp_client.putfo(bash_script_fo, script_path)
 
@@ -134,7 +134,7 @@ rm -- "${{0}}"
     bash_script_fo.close()
     ssh_client.close()
 
-def execute_certificate_script_on_synology(host: str = 'nas.hutter.cloud', username: str = 'admin', ssh_key_file: str = '/ssh-key/private-key', script_path: str = '/tmp/synology-certificate.sh'): 
+def execute_certificate_script_on_synology(host: str = 'synology.hutter.cloud', username: str = 'synadmin', ssh_key_file: str = '/ssh-key/private-key', script_path: str = '/tmp/synology-certificate.sh'):
     """
         execute the given script on the system with root rights (passwordless sudo required)
     """
