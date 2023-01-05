@@ -87,7 +87,7 @@ cat << EOF > /usr/syno/etc/certificate/_archive/letsen/cert.pem
 EOF
 
 echo copy chain
-cat << EOF > /usr/syno/etc/certificate/_archive/letsent/chain.pem
+cat << EOF > /usr/syno/etc/certificate/_archive/letsen/chain.pem
 {intermediate}
 {root}
 EOF
