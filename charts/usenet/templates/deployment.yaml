@@ -263,6 +263,8 @@ spec:
           mountPath: /config
         - name: {{ .Release.Name }}-library-movies
           mountPath: /movies
+        - name: {{ .Release.Name }}-downloads
+          mountPath: /downloads
       volumes:
         - name: {{ .Release.Name }}-library-movies
           persistentVolumeClaim:
@@ -270,6 +272,9 @@ spec:
         - name: {{ .Release.Name }}-radarr
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-radarr
+        - name: {{ .Release.Name }}-downloads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads
 ##
 # sabnzbd container
 # deploy sabnzbd container
@@ -403,6 +408,8 @@ spec:
           mountPath: /config
         - name: {{ .Release.Name }}-library-tv
           mountPath: /tv
+        - name: {{ .Release.Name }}-downloads
+          mountPath: /downloads
       volumes:
         - name: {{ .Release.Name }}-library-tv
           persistentVolumeClaim:
@@ -410,6 +417,9 @@ spec:
         - name: {{ .Release.Name }}-sonarr
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-sonarr
+        - name: {{ .Release.Name }}-downloads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads
 
 ##
 # file browser
