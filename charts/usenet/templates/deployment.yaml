@@ -109,7 +109,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-nzbhydra2
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -288,7 +288,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-sabnzbd
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -425,7 +425,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-file-browser
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   template:
