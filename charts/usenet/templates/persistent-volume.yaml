@@ -12,7 +12,7 @@ spec:
   capacity: { storage: 1Gi }
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: {{ .Values.library.base_path }}/movies
+    path: /volume1/movies
     server: {{ .Values.library.nfs_server }}
     readOnly: false
 ---
@@ -28,6 +28,6 @@ spec:
   capacity: { storage: 1Gi }
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: {{ .Values.library.base_path }}/tv
+    path: /volume2/tv
     server: {{ .Values.library.nfs_server }}
     readOnly: false
