@@ -99,6 +99,11 @@ data:
         cp -f /nzbtomedia/autoProcessMedia.cfg /nzbtomedia/nzbToMedia/autoProcessMedia.cfg
     fi
 
+    # setup permissions for nzbtomedia folder
+    uid=$(id -u abc)
+    gid=$(id -g abc)
+    chown -R ${uid}:${gid} /nzbtomedia/nzbToMedia
+
     # ensure download folders arent included in backup
     touch /incomplete-downloads/.nobackup
     touch /downloads/.nobackup

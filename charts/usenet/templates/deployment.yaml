@@ -21,7 +21,7 @@ spec:
         app: {{ .Release.Name }}-bazarr
     spec:
       containers:
-      - name: sabnzbd
+      - name: bazarr
         image: "lscr.io/linuxserver/bazarr:{{ .Values.bazarr.version }}"
         imagePullPolicy: IfNotPresent
         ports:
@@ -118,7 +118,7 @@ spec:
         app: {{ .Release.Name }}-nzbhydra2
     spec:
       containers:
-      - name: sabnzbd
+      - name: nzbhydra
         image: "lscr.io/linuxserver/nzbhydra2:{{ .Values.nzbhydra2.version }}"
         imagePullPolicy: IfNotPresent
         ports:
@@ -242,7 +242,7 @@ spec:
         app: {{ .Release.Name }}-radarr
     spec:
       containers:
-      - name: sabnzbd
+      - name: radarr
         image: "lscr.io/linuxserver/radarr:{{ .Values.radarr.version }}"
         imagePullPolicy: IfNotPresent
         ports:
@@ -298,7 +298,7 @@ spec:
     spec:
       initContainers:
       - name: nzbtomedia
-        image: alpine
+        image: "lscr.io/linuxserver/sabnzbd:{{ .Values.sabnzbd.version }}"
         command:
           - /bin/sh
           - /script/script.sh
@@ -382,7 +382,7 @@ spec:
         app: {{ .Release.Name }}-sonarr
     spec:
       containers:
-      - name: sabnzbd
+      - name: sonarr
         image: "lscr.io/linuxserver/sonarr:{{ .Values.sonarr.version }}"
         imagePullPolicy: IfNotPresent
         ports:
