@@ -12,18 +12,18 @@ spec:
     targetPort: 8181
   selector:
     app: {{ .Release.Name }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Release.Name }}-oauth2-proxy
-  labels:
-    app.kubernetes.io/name: {{ .Release.Name }}
-spec:
-  ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 4180
-  selector:
-    app: {{ .Release.Name }}-oauth2-proxy
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Release.Name }}-oauth2-proxy
+#   labels:
+#     app.kubernetes.io/name: {{ .Release.Name }}
+# spec:
+#   ports:
+#   - name: http
+#     port: 80
+#     protocol: TCP
+#     targetPort: 4180
+#   selector:
+#     app: {{ .Release.Name }}-oauth2-proxy
