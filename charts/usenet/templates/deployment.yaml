@@ -346,7 +346,7 @@ spec:
         command:
         - /bin/sh
         - -c
-        - "apk add --no-cache ffmpeg && exec /init"
+        - "apk add --no-cache ffmpeg git && exec /init"
         securityContext:
           privileged: true
       volumes:
