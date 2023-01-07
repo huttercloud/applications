@@ -263,9 +263,9 @@ spec:
         # radarr and sonarr need to run as root too to allow move
         # of the downloaded files to plex
         - name: PUID
-          value: 0
+          value: "0"
         - name: PGID
-          value: 0
+          value: "0"
         volumeMounts:
         - name: {{ .Release.Name }}-radarr
           mountPath: /config
@@ -344,9 +344,9 @@ spec:
         # sabznbd needs to run as root to allow loopback mounts
         # of iso images
         - name: PUID
-          value: 0
+          value: "0"
         - name: PGID
-          value: 0
+          value: "0"
         volumeMounts:
         - name: {{ .Release.Name }}-sabnzbd
           mountPath: /config
@@ -424,9 +424,9 @@ spec:
         # radarr and sonarr need to run as root too to allow move
         # of the downloaded files to plex
         - name: PUID
-          value: 0
+          value: "0"
         - name: PGID
-          value: 0
+          value: "0"
         volumeMounts:
         - name: {{ .Release.Name }}-sonarr
           mountPath: /config
