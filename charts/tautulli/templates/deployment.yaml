@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: tautulli
-        image: "ghcr.io/tautulli/tautulli:{{ .Values.version }}"
+        image: "ghcr.io/tautulli/tautulli:{{ .Values.tautulli.version }}"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8181
@@ -36,3 +36,71 @@ spec:
         - name: {{ .Release.Name }}
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-oauth2-proxy
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-oauth2-proxy
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-oauth2-proxy
+    spec:
+      containers:
+      # there seems to be a bug in 6+ keycloak provider which doesnt work well with jwt tokens
+      # instead using the more standard oidc provider is required.
+      # see: https://github.com/oauth2-proxy/oauth2-proxy/issues/773
+      - args:
+        # general config
+        - --http-address=0.0.0.0:4180
+        - --email-domain=*
+        - --upstream=file:///dev/null
+        # pass auth headers
+        - --pass-basic-auth=false
+        - --pass-access-token=true
+        - --set-xauthrequest=true
+        - --set-authorization-header=true
+        - --pass-authorization-header=true
+        - --skip-provider-button=true
+        - --skip-auth-preflight=true
+        - --pass-host-header=true
+        # if jwt bearer token exists dont do a new authentication
+        # but verify auth (e.g. for scripts)
+        - --skip-jwt-bearer-tokens=true
+        # auth0 configuration
+        - --provider=oidc
+        - --skip-oidc-discovery=false
+        - --oidc-issuer-url=https://hutter-cloud.eu.auth0.com/
+        - --scope=openid profile email
+
+        env:
+        - name: OAUTH2_PROXY_CLIENT_ID
+          valueFrom:
+              secretKeyRef:
+                name: oauth2-proxy-secret
+                key: client_id
+        - name: OAUTH2_PROXY_CLIENT_SECRET
+          valueFrom:
+              secretKeyRef:
+                name: oauth2-proxy-secret
+                key: client_secret
+        - name: OAUTH2_PROXY_COOKIE_SECRET
+          valueFrom:
+              secretKeyRef:
+                name: oauth2-proxy-secret
+                key: cookie_secret
+        image: "quay.io/oauth2-proxy/oauth2-proxy:{{ .Values.oauth2proxy.version }}"
+        imagePullPolicy: Always
+        name: oauth2-proxy
+        ports:
+        - containerPort: 4180
+          protocol: TCP
