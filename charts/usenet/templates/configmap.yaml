@@ -10,44 +10,7 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
 data:
   index.html: |
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Welcome to usenet.hutter.cloud!</title>
-    <style>
-        body {
-            width: 35em;
-            margin: 0 auto;
-            font-family: Tahoma, Verdana, Arial, sans-serif;
-        }
-    </style>
-    </head>
-
-    <body>
-
-    <h1>Welcome to hutter.cloud!</h1>
-    <p>
-    You can access the following services - if you have the necessary credentials.
-    </p>
-
-    <h2>usenet</h2>
-    <h3>movies and series</h3>
-    <p>
-    <a href="https://{{ .Values.ingress.host }}/radarr/">Radarr - movies</a></br>
-    <a href="https://{{ .Values.ingress.host }}/sonarr/">Sonarr - tv series</a></br>
-    <a href="https://{{ .Values.ingress.host }}/bazarr/">Bazarr - subtitles</a></br>
-    </p>
-    <h3>manual search and download</h3>
-    <p>
-    <a href="https://{{ .Values.ingress.host }}/nzbhydra2/">nzbhydra2 - manual usenet search</a></br>
-    <a href="https://{{ .Values.ingress.host }}/browser/">browse downloaded items</a></br>
-    </p>
-    <h3>downloader</h3>
-    <p>
-    <a href="https://{{ .Values.ingress.host }}/sabnzbd/">Sabnzbd</a></br>
-    </p>
-    </body>
-    </html>
+    {{ .Files.Get "usenet-index.html" | nindent 4 }}
 
 ##
 # simple cleanup script
