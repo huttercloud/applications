@@ -1,0 +1,4 @@
+version: v2.11.1
+ingress:
+  host: tautulli.hutter.cloud
+storage_class_name: persistent
