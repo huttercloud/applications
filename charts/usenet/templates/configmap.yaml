@@ -62,8 +62,11 @@ metadata:
 data:
   script.sh: |
     #!/bin/sh
-    find /downloads -type f -mtime +3 -delete
-    find /incomplete-downloads -type f -mtime +3 -delete
+    # delete old files
+    find /downloads -mindepth 2 -type f -mtime +3 -delete
+    find /incomplete-downloads -mindepth 2 -type f -mtime +1 -delete
+    # delete empty directories in downloads
+    find /downloads -mindepth 2 -empty -type d -delete
 ##
 # nzbtomedia init script
 ##
