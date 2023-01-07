@@ -1,5 +1,6 @@
-tautulli.version: v2.11.1
-oauth2proxy.version: v7.4.0
+tautulli: { version: v2.11.1 }
+oauth2proxy: { version: "v7.4.0" }
+
 ingress:
   host: tautulli.hutter.cloud
 storage_class_name: persistent
