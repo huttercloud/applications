@@ -78,6 +78,12 @@ jobs:
           python3 update-versions/update-versions.py \
             --file applications/charts/loki/Chart.yaml \
             --replace '\s*?version:\s\"(.*)\"' LOKI
+
+          python3 update-versions/update-versions.py \
+            --file applications/charts/tautulli/values-node-b.yaml \
+            --replace 'tautulli:\s{\sversion:\s\"(.*)\"\s}' TAUTULLI \
+            --replace 'oauth2proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
+
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4
         with:
