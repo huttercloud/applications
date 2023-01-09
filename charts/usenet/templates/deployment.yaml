@@ -496,7 +496,7 @@ spec:
           mountPath: /srv/library/tv
         - name: {{ .Release.Name }}-library-movies
           mountPath: /srv/library/movies
-        - name: {{ .Release.Name }}-library-movies
+        - name: {{ .Release.Name }}-library-audiobooks
           mountPath: /srv/library/audiobooks
       volumes:
         - name: {{ .Release.Name }}-downloads
