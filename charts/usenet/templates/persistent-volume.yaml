@@ -31,3 +31,19 @@ spec:
     path: /volume2/tv
     server: {{ .Values.library.nfs_server }}
     readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-library-audiobooks
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-library-audiobooks
+  accessModes: [ReadWriteMany]
+  capacity: { storage: 1Gi }
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /volume2/audiobooks
+    server: {{ .Values.library.nfs_server }}
+    readOnly: false

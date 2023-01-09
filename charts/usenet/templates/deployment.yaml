@@ -491,8 +491,23 @@ spec:
         - /browser
         volumeMounts:
         - name: {{ .Release.Name }}-downloads
-          mountPath: /srv
+          mountPath: /srv/downloads
+        - name: {{ .Release.Name }}-library-tv
+          mountPath: /srv/library/tv
+        - name: {{ .Release.Name }}-library-movies
+          mountPath: /srv/library/movies
+        - name: {{ .Release.Name }}-library-movies
+          mountPath: /srv/library/audiobooks
       volumes:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-downloads
+        - name: {{ .Release.Name }}-library-tv
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-tv
+        - name: {{ .Release.Name }}-library-movies
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-movies
+        - name: {{ .Release.Name }}-library-audiobooks
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-audiobooks
