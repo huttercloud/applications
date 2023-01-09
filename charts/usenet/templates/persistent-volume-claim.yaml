@@ -117,3 +117,14 @@ spec:
   storageClassName: {{ .Release.Name }}-library-tv
   accessModes: [ReadWriteMany]
   resources: { requests: { storage: 1Gi } }
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-library-audiobooks
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Release.Name }}-library-audiobooks
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 1Gi } }
