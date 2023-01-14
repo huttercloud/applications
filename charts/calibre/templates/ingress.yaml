@@ -54,7 +54,7 @@ spec:
     - hosts: [{{ .Values.ingress.calibre }}]
       secretName: {{ .Release.Name }}-tls
   rules:
-    - host: {{ .Values.ingress.host }}
+    - host: {{ .Values.ingress.calibre }}
       http:
         paths:
         - path: /
@@ -80,7 +80,7 @@ spec:
     - hosts: [{{ .Values.ingress.web }}]
       secretName: {{ .Release.Name }}-tls
   rules:
-    - host: {{ .Values.ingress.host }}
+    - host: {{ .Values.ingress.web }}
       http:
         paths:
         - path: /
