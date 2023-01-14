@@ -2,7 +2,7 @@
 
 # storage class name for local volumes
 storage_class_name: persistent
-
+storage_class_name_downloads: persistent-2
 # library nfs storage configuration
 library:
   nfs_server: 192.168.30.17

@@ -11,7 +11,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
-  storageClassName: {{ .Values.storage_class_name }}
+  storageClassName: {{ .Values.storage_class_name_downloads }}
   accessModes: [ReadWriteMany]
   resources: { requests: { storage: 800Gi } }
 
@@ -24,7 +24,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
-  storageClassName: {{ .Values.storage_class_name }}
+  storageClassName: {{ .Values.storage_class_name_downloads }}
   accessModes: [ReadWriteMany]
   resources: { requests: { storage: 800Gi } }
 
