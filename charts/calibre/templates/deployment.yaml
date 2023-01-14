@@ -30,9 +30,12 @@ spec:
         - name: TZ
           value: Europe/Zurich
         volumeMounts:
-        - name: {{ .Release.Name }}-library-ebooks
+        - name: {{ .Release.Name }}-calibre
           mountPath: /config
       volumes:
+        - name: {{ .Release.Name }}-calibre
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-calibre
         - name: {{ .Release.Name }}-library-ebooks
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-library-ebooks
