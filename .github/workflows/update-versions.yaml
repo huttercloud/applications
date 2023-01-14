@@ -81,8 +81,11 @@ jobs:
 
           python3 update-versions/update-versions.py \
             --file applications/charts/tautulli/values-node-b.yaml \
-            --replace 'tautulli:\s{\sversion:\s\"(.*)\"\s}' TAUTULLI \
-            --replace 'oauth2proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
+            --replace 'tautulli:\s{\sversion:\s\"(.*)\"\s}' TAUTULLI
+
+          python3 update-versions/update-versions.py \
+            --file applications/charts/overseerr/values-node-b.yaml \
+            --replace 'overseerr:\s{\sversion:\s\"(.*)\"\s}' OVERSEERR
 
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4

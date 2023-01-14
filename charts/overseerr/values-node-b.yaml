@@ -1,0 +1,5 @@
+overseerr: { version: "v1.31.0" }
+
+ingress:
+  host: overseerr.hutter.cloud
+storage_class_name: persistent
