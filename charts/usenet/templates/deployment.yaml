@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-bazarr
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -70,7 +70,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-homepage
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
@@ -109,7 +109,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-nzbhydra2
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -158,7 +158,7 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
   name: {{ .Release.Name }}-oauth2-proxy
 spec:
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   selector:
@@ -233,7 +233,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-radarr
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -301,7 +301,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-sabnzbd
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -335,7 +335,6 @@ spec:
         #     path: /
         #     port: 8080
         # readinessProbe:
-        #   httpGet:
         #     path: /
         #     port: 8080
         env:
@@ -394,7 +393,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-sonarr
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
@@ -459,7 +458,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-file-browser
-  replicas: 1
+  replicas: 0
   strategy:
     type: Recreate
   template:
