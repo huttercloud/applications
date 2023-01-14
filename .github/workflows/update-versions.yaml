@@ -49,15 +49,15 @@ jobs:
       - name: Update versions
         run: |
           python3 update-versions/update-versions.py \
-            --file applications/applications/node-b/templates/usenet.yaml \
-            --replace '\s*?-\s{\sname:\s+sabnzbd.version,\svalue:\s(.*)\s}' SABNZBD \
-            --replace '\s*?-\s{\sname:\s+nzbtomedia.version,\svalue:\s(.*)\s}' NZBTOMEDIA \
-            --replace '\s*?-\s{\sname:\s+oauth2proxy.version,\svalue:\s(.*)\s}' OAUTH2PROXY \
-            --replace '\s*?-\s{\sname:\s+nzbhydra2.version,\svalue:\s(.*)\s}' NZBHYDRA2 \
-            --replace '\s*?-\s{\sname:\s+filebrowser.version,\svalue:\s(.*)\s}' FILEBROWSER \
-            --replace '\s*?-\s{\sname:\s+sonarr.version,\svalue:\s(.*)\s}' SONARR \
-            --replace '\s*?-\s{\sname:\s+radarr.version,\svalue:\s(.*)\s}' RADARR \
-            --replace '\s*?-\s{\sname:\s+bazarr.version,\svalue:\s(.*)\s}' BAZARR
+            --file applications/charts/usenet/values-node-b.yaml \
+            --replace 'sabnzbd:\s{\sversion:\s\"(.*)\"\s}' SABNZBD \
+            --replace 'nzbtomedia:\s{\sversion:\s\"(.*)\"\s}' NZBTOMEDIA \
+            --replace 'oauth2proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY \
+            --replace 'nzbhydra2:\s{\sversion:\s\"(.*)\"\s}' NZBHYDRA2 \
+            --replace 'filebrowser:\s{\sversion:\s\"(.*)\"\s}' FILEBROWSER \
+            --replace 'sonarr:\s{\sversion:\s\"(.*)\"\s}' SONARR \
+            --replace 'radarr:\s{\sversion:\s\"(.*)\"\s}' RADARR \
+            --replace 'bazarr:\s{\sversion:\s\"(.*)\"\s}' BAZARR
 
           python3 update-versions/update-versions.py \
             --file applications/charts/prometheus/Chart.yaml \
