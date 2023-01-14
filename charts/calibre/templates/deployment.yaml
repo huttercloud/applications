@@ -32,6 +32,8 @@ spec:
         volumeMounts:
         - name: {{ .Release.Name }}-calibre
           mountPath: /config
+        - name: {{ .Release.Name }}-library-ebooks
+          mountPath: /books
       volumes:
         - name: {{ .Release.Name }}-calibre
           persistentVolumeClaim:
