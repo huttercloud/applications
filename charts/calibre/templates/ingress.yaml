@@ -1,0 +1,92 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-oauth2
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    # allow bigger buffer for proxied requests, required for oauth2 oidc to work
+    # properly
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+    kubernetes.io/ingress.class: public
+    # for a change the oauth2 proxy creates the tls cert as it needs both host names anyways
+    # so we dont have to setup two oauth2 ingresses
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.calibre }}, {{ .Values.ingress.web }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.calibre }}
+      http:
+        paths:
+        - path: /oauth2
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-oauth2-proxy
+              port:
+                number: 80
+    - host: {{ .Values.ingress.web }}
+      http:
+        paths:
+        - path: /oauth2
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-oauth2-proxy
+              port:
+                number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-calibre
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.calibre }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-calibre
+              port:
+                number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-calibre-web
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.web }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-calibre-web
+              port:
+                number: 80

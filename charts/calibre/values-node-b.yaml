@@ -1,0 +1,18 @@
+# Default values for node-b.
+
+calibre: { version: "6.11.0" }
+calibreweb: { version: "0.6.19" }
+oauth2proxy: { version: "v7.4.0" }
+
+
+
+# storage class name for local volumes
+storage_class_name: persistent
+
+# library nfs storage configuration
+library:
+  nfs_server: 192.168.30.17
+
+ingress:
+  calibre: calibre-content.hutter.cloud
+  web: calibre.hutter.cloud

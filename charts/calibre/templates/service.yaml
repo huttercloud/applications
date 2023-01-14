@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-calibre
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: {{ .Release.Name }}-calibre
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-calibre-web
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 8083
+  selector:
+    app: {{ .Release.Name }}-calibre-web
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-oauth2-proxy
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 4180
+  selector:
+    app: {{ .Release.Name }}-oauth2-proxy

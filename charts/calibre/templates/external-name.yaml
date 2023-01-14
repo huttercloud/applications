@@ -1,0 +1,29 @@
+# create externalname service to allow ext-dns
+# to create a cname record
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-external-name-content
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.calibre }}
+    hutter.cloud/dns-service: "aws"
+spec:
+  type: ExternalName
+  externalName: infra.hutter.cloud
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-external-name-web
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.web }}
+    hutter.cloud/dns-service: "aws"
+spec:
+  type: ExternalName
+  externalName: infra.hutter.cloud

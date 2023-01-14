@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  # no prefix added here as pvcs with configuration are already in place!
-  name: usenet
+  name: {{ .Values.spec.applicationPrefix }}-calibre
   namespace: default
 spec:
   project: default
@@ -11,11 +10,11 @@ spec:
   source:
     repoURL: git@github.com:huttercloud/applications.git
     targetRevision: HEAD
-    path: charts/usenet
+    path: charts/calibre
     helm:
+      releaseName: calibre
       valueFiles:
         - {{ .Values.spec.valuesFile }}
-
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: default
