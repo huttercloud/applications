@@ -1,0 +1,100 @@
+# pureftpd deployment
+# requires usenet and calibre chart installed for nfs shares!
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-pureftpd
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-pureftpd
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-pureftpd
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-pureftpd
+    spec:
+      containers:
+      - name: pureftpd
+        image: "debian:latest"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 21
+        command:
+        - /bin/sh
+        - /script/init.sh
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        - name: AUTH0_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: clientId
+        - name: AUTH0_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: clientSecret
+        - name: AUTH0_AUDIENCE
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}
+              key: audience
+        - name: AUTH0_DOMAIN
+          value: "hutter-cloud.eu.auth0.com"
+        - name: AUTH0_SCOPE
+          value: "openid email profile"
+        volumeMounts:
+        - name: calibre-library-ebooks
+          mountPath: /ftp/library/ebooks
+        - name: usenet-downloads
+          mountPath: /ftp/downloads
+        - name: usenet-library-audiobooks
+          mountPath: /ftp/library/audiobooks
+        - name: usenet-library-movies
+          mountPath: /ftp/library/movies
+        - name: usenet-library-tv
+          mountPath: /ftp/library/tv
+        - name: config
+          subPath: init.sh
+          mountPath: /init.sh
+        - name: config
+          subPath: authenticate.py
+          mountPath: /authenticate.py
+        - name: certificate
+          mountPath: /certificate
+      volumes:
+        - name: calibre-library-ebooks
+          readOnly: true
+          persistentVolumeClaim:
+            claimName: calibre-library-ebooks
+        - name: usenet-library-audiobooks
+          readOnly: true
+          persistentVolumeClaim:
+            claimName: usenet-library-audiobooks
+        - name: usenet-library-tv
+          readOnly: true
+          persistentVolumeClaim:
+            claimName: usenet-library-tv
+        - name: usenet-library-movies
+          readOnly: true
+          persistentVolumeClaim:
+            claimName: usenet-library-movies
+        - name: usenet-downloads
+          readOnly: true
+          persistentVolumeClaim:
+            claimName: usenet-downloads
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}
+        - name: certificate
+          secret:
+            ecretName: {{ .Release.Name }}-cert
+
