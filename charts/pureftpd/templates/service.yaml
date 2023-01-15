@@ -23,6 +23,7 @@ spec:
     targetPort: {{ . }}
     protocol: TCP
     name: "ftpa-{{ . }}"
+    nodePort: {{ . }}
   {{- end }}
   selector:
     app: {{ .Release.Name }}-pureftpd
