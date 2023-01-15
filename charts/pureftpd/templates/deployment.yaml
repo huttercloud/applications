@@ -76,23 +76,18 @@ spec:
           mountPath: /certificate
       volumes:
         - name: calibre-library-ebooks
-          readOnly: true
           persistentVolumeClaim:
             claimName: calibre-library-ebooks
         - name: usenet-library-audiobooks
-          readOnly: true
           persistentVolumeClaim:
             claimName: usenet-library-audiobooks
         - name: usenet-library-tv
-          readOnly: true
           persistentVolumeClaim:
             claimName: usenet-library-tv
         - name: usenet-library-movies
-          readOnly: true
           persistentVolumeClaim:
             claimName: usenet-library-movies
         - name: usenet-downloads
-          readOnly: true
           persistentVolumeClaim:
             claimName: usenet-downloads
         - name: config
