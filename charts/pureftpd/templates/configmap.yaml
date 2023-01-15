@@ -11,7 +11,7 @@ data:
 
     apt-get update
     apt-get install -y python3 python3-pip pure-ftpd rsyslog
-    pip install --upgrade requests
+    pip install --upgrade requests email-validator
 
     cat /certificate/tls.key /certificate/tls.crt  > /etc/ssl/private/pure-ftpd.pem
     chmod 600 /etc/ssl/private/pure-ftpd.pem

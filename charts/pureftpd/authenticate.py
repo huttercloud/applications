@@ -8,6 +8,7 @@ import requests
 import traceback
 import syslog
 import os
+from email_validator import validate_email
 
 # auth0 config, passed as env vars to pod
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
@@ -33,7 +34,6 @@ def return_auth(auth_state: int=1):
         print the authentication result to stdout
     """
 
-
     print(f'''
 auth_ok:{auth_state}'
 uid:999
@@ -46,6 +46,8 @@ if __name__ == '__main__':
 
     try:
         send_syslog(message=f'authentication process for {AUTHD_ACCOUNT} started')
+
+        validate_email(AUTHD_ACCOUNT, check_deliverability=False)
 
         auth_payload=dict(
             grant_type='http://auth0.com/oauth/grant-type/password-realm',
