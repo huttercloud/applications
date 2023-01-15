@@ -104,3 +104,16 @@ spec:
     targetPort: 80
   selector:
     app: {{ .Release.Name }}-file-browser
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-readarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 8787
+  selector:
+    app: {{ .Release.Name }}-readarr

@@ -15,6 +15,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: {{ .Release.Name }}-calibre-content
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 8081
+    targetPort: 8081
+  selector:
+    app: {{ .Release.Name }}-calibre
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: {{ .Release.Name }}-calibre-web
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}

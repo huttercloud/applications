@@ -8,7 +8,7 @@ filebrowser: { version: "v2.23.0" }
 sonarr: { version: "3.0.9" }
 radarr: { version: "4.3.2" }
 bazarr: { version: "1.1.4" }
-
+readarr: { version: "0.1.1-develop" }
 
 # storage class name for local volumes
 storage_class_name: persistent

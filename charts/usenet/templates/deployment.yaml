@@ -510,3 +510,60 @@ spec:
         - name: {{ .Release.Name }}-library-audiobooks
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-library-audiobooks
+##
+# readarr
+##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-readarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-readarr
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-readarr
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-readarr
+    spec:
+      containers:
+      - name: readarr
+        image: "lscr.io/linuxserver/readarr:{{ .Values.readarr.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8787
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        # sabznbd needs to run as root to allow loopback mounts
+        # of iso images. as sabnzbd writes wiles with root ownership
+        # radarr and sonarr need to run as root too to allow move
+        # of the downloaded files to plex
+        - name: PUID
+          value: "0"
+        - name: PGID
+          value: "0"
+        volumeMounts:
+        - name: {{ .Release.Name }}-readarr
+          mountPath: /config
+        - name: {{ .Release.Name }}-library-ebooks
+          mountPath: /books
+        - name: {{ .Release.Name }}-downloads
+          mountPath: /downloads
+      volumes:
+        # ebooks pv is created in calibre chart!
+        - name: {{ .Release.Name }}-library-ebooks
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-ebooks
+        - name: {{ .Release.Name }}-readarr
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-readarr
+        - name: {{ .Release.Name }}-downloads
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-downloads
