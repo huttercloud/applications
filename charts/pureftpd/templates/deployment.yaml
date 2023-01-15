@@ -19,7 +19,7 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-pureftpd
-       annotations:
+      annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
