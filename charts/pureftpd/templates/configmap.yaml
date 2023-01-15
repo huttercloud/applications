@@ -30,6 +30,10 @@ data:
         --daemonize
 
     # start pure ftpd daemon
+    # use external ip address for passive ip
+    # internally ftp wont work like this but should
+    # allow ftp clients connect from wan.
+    # even though filezilla would be intelligent enough to handle that ;-)
     /usr/sbin/pure-ftpd \
         --tls=1 \
         --dontresolve \
@@ -39,7 +43,7 @@ data:
         --noanonymous \
         --nochmod \
         --antiwarez \
-        --forcepassiveip 192.168.30.90 \
+        --forcepassiveip infra.hutter.cloud \
         -lextauth:/var/run/ftpd.sock \
         --daemonize
 
