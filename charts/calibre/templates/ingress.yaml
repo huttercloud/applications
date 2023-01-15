@@ -75,7 +75,9 @@ metadata:
     kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   proxy_set_header "X-Auth-As: user";
+    nginx.org/server-snippets: |
       proxy_set_header "X-Auth-As: user";
 spec:
   tls:
