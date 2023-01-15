@@ -1,34 +1,72 @@
 #!/usr/bin/env python3
 
 """
-
+    use auth0 client to verify user credentials
 """
 
 import requests
+import traceback
 import syslog
+import os
+
+# auth0 config, passed as env vars to pod
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
+AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
+AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
+AUTH0_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
+AUTH0_SCOPE = os.getenv('AUTH0_SCOPE')
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
+
+# pure-ftpd authd env vars
+AUTHD_ACCOUNT = os.getenv('AUTHD_ACCOUNT')
+AUTHD_PASSWORD = os.getenv('AUTHD_PASSWORD')
+
+def log(message: str, priority: int = syslog.LOG_INFO):
+    """
+        send log message to syslog
+    """
+
+    syslog.syslog(priority=priority, message=f'pure-ftpd extauth: {message}')
+
+def return_auth(auth_state: int=1):
+    """
+        print the authentication result to stdout
+    """
+
+
+    print(f'''
+auth_ok:{auth_state}'
+uid:999
+gid:999
+dir:/ftp
+end
+    ''')
 
 if __name__ == '__main__':
 
-    syslog.syslog('pure-ftpd extauth: started')
+    try:
+        log(message=f'authentication for {AUTHD_ACCOUNT} started')
 
-    # payload = dict(
-    # )
+        auth_payload=dict(
+            grant_type='http://auth0.com/oauth/grant-type/password-realm',
+            realm='Username-Password-Authentication',
+            client_id=AUTH0_CLIENT_ID,
+            client_secret=AUTH0_CLIENT_SECRET,
+            audience=AUTH0_AUDIENCE,
+            username=AUTHD_ACCOUNT,
+            password=AUTHD_PASSWORD,
+            scope=AUTH0_SCOPE,
+        )
 
-    # r = requests.post(
-    #         url='https://hutter-cloud.eu.auth0.com/oauth/token',
-    #         json=payload
-    #     )
-    # print(r.json())
-    # r.raise_for_status()
+        r = requests.post(
+            url=f'https://{AUTH0_DOMAIN}/oauth/token',
+            json=auth_payload
+        )
+        r.raise_for_status()
+        return_auth()
 
-    # data = r.json()
-    # print(data)
-
-    # abort connections for now until script is fixed up!
-    print('auth_ok:-1')
-    print('uid:999')
-    print('gid:999')
-    print('dir:/ftp')
-    print('end')
+    except Exception as ex:
+        log(message=traceback.format_exc(), priority=syslog.LOG_ERR)
+        return_auth(auth_state=-1)
 
     syslog.syslog('pure-ftpd extauth: ended')
