@@ -39,7 +39,6 @@ data:
         --dontresolve \
         --passiveportrange 30000:30050 \
         --maxclientsnumber 12 \
-        --maxclientsperip 5 \
         --noanonymous \
         --nochmod \
         --antiwarez \
