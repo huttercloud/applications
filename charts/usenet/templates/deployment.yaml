@@ -552,7 +552,7 @@ spec:
         volumeMounts:
         - name: {{ .Release.Name }}-readarr
           mountPath: /config
-        - name: {{ .Release.Name }}-library-ebooks
+        - name: calibre-library-ebooks
           mountPath: /books
         - name: {{ .Release.Name }}-downloads
           mountPath: /downloads
