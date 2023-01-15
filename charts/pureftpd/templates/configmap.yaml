@@ -26,9 +26,10 @@ data:
     # start authd daemon
     /usr/sbin/pure-authd --run /authenticate.py --socket /var/run/ftpd.sock --daemonize
 
-    #/usr/sbin/pure-ftpd --tls=1 --dontresolve --passiveportrange 30000:30009 --maxclientsnumber 5 --maxclientsperip 5  --nochmod --antiwarez --forcepassiveip 0.0.0.0 --daemonize
+    #/usr/sbin/pure-ftpd --tls=1 --dontresolve --passiveportrange 30000:30009 --maxclientsnumber 5 --maxclientsperip 5 --noanonymous --nochmod --antiwarez --forcepassiveip 192.168.30.90 -lextauth:/var/run/ftpd.sock
+    # --daemonize
 
-    #-lextauth:/var/run/ftpd.sock
+    #
 
     # tail messages
     tail -F /var/log/messages

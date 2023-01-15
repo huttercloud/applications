@@ -5,9 +5,11 @@
 """
 
 import requests
-
+import syslog
 
 if __name__ == '__main__':
+
+    syslog.syslog('pure-ftpd extauth: started')
 
     # payload = dict(
     # )
@@ -27,3 +29,5 @@ if __name__ == '__main__':
     print('uid:999')
     print('gid:999')
     print('dir:/ftp')
+
+    syslog.syslog('pure-ftpd extauth: ended')
