@@ -29,6 +29,8 @@ spec:
         command:
         - /bin/sh
         - /init.sh
+        securityContext:
+          privileged: true
         env:
         - name: TZ
           value: Europe/Zurich

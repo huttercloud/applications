@@ -10,6 +10,13 @@ data:
     set -e
 
     apt-get update
+    apt-get install -y python3 python3-pip pure-ftpd
+
+    pip install --upgrade requests
+
+    cat /certificate/tls.key /certificate/tls.crt  > /etc/ssl/private/pure-ftpd.pem
+    chmod 600 /etc/ssl/private/pure-ftpd.pem
+
     # placeholder
     apt-get install -y nginx
     nginx -g 'daemon off;'
