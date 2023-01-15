@@ -28,7 +28,7 @@ spec:
         - containerPort: 21
         command:
         - /bin/sh
-        - /script/init.sh
+        - /init.sh
         env:
         - name: TZ
           value: Europe/Zurich
