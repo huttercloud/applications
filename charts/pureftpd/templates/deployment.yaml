@@ -30,7 +30,7 @@ spec:
         - /bin/sh
         - /init.sh
         securityContext:
-          privileged: true
+          privileged: true # over the top, but cant be bothered to fix up the correct capabilities (somethin something NET_)
         env:
         - name: TZ
           value: Europe/Zurich
@@ -96,6 +96,7 @@ spec:
         - name: config
           configMap:
             name: {{ .Release.Name }}
+            defaultMode: 0755
         - name: certificate
           secret:
             secretName: {{ .Release.Name }}-cert
