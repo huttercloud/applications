@@ -89,6 +89,12 @@ jobs:
             --replace 'overseerr:\s{\sversion:\s\"(.*)\"\s}' OVERSEERR \
             --replace 'oauth2proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
 
+          python3 update-versions/update-versions.py \
+            --file applications/charts/calibre/values-node-b.yaml \
+            --replace 'calibre:\s{\sversion:\s\"(.*)\"\s}' CALIBRE \
+            --replace 'calibreweb:\s{\sversion:\s\"(.*)\"\s}' CALIBREWEB \
+            --replace 'oauth2proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
+
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4
         with:
