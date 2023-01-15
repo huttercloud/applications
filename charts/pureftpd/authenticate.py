@@ -24,8 +24,8 @@ if __name__ == '__main__':
     # data = r.json()
     # print(data)
 
-
-    print('auth_ok:1')
+    # abort connections for now until script is fixed up!
+    print('auth_ok:-1')
     print('uid:999')
     print('gid:999')
     print('dir:/ftp')
