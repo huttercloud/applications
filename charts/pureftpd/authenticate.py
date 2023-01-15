@@ -24,6 +24,6 @@ if __name__ == '__main__':
 
 
     print('auth_ok:1')
-    print('uid:69')
-    print('gid:42')
+    print('uid:999')
+    print('gid:999')
     print('dir:/ftp')

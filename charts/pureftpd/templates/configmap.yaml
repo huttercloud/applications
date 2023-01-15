@@ -17,6 +17,9 @@ data:
     cat /certificate/tls.key /certificate/tls.crt  > /etc/ssl/private/pure-ftpd.pem
     chmod 600 /etc/ssl/private/pure-ftpd.pem
 
+    groupadd -g 999 ftp
+    useradd -M -u 999 -g 999 ftp
+
     # start authd daemon
     /usr/sbin/pure-authd -r /authenticate.py -s /var/run/ftpd.sock -B
     # /usr/sbin/pure-ftpd --tls=1 -p 35000:35100 -c 5 -C 5 -O clf:/dev/stdout -R -s -S 21 -lextauth:/var/run/ftpd.sock
