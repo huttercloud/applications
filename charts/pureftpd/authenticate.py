@@ -29,5 +29,6 @@ if __name__ == '__main__':
     print('uid:999')
     print('gid:999')
     print('dir:/ftp')
+    print('end')
 
     syslog.syslog('pure-ftpd extauth: ended')
