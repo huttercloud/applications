@@ -8,6 +8,11 @@ metadata:
 spec:
   type: NodePort
   ports:
+  - name: ftpc
+    port: 20
+    protocol: TCP
+    targetPort: 20
+    nodePort: 20
   - name: ftp
     port: 21
     protocol: TCP
