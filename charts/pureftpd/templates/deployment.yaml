@@ -96,5 +96,5 @@ spec:
             name: {{ .Release.Name }}
         - name: certificate
           secret:
-            ecretName: {{ .Release.Name }}-cert
+            secretName: {{ .Release.Name }}-cert
 
