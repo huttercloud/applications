@@ -10,23 +10,28 @@ data:
     set -e
 
     apt-get update
-    apt-get install -y python3 python3-pip pure-ftpd
-
+    apt-get install -y python3 python3-pip pure-ftpd rsyslog
     pip install --upgrade requests
 
     cat /certificate/tls.key /certificate/tls.crt  > /etc/ssl/private/pure-ftpd.pem
     chmod 600 /etc/ssl/private/pure-ftpd.pem
 
+    # create user and group
     groupadd -g 999 ftp
     useradd -M -u 999 -g 999 ftp
 
-    # start authd daemon
-    /usr/sbin/pure-authd -r /authenticate.py -s /var/run/ftpd.sock -B
-    # /usr/sbin/pure-ftpd --tls=1 -p 35000:35100 -c 5 -C 5 -O clf:/dev/stdout -R -s -S 21 -lextauth:/var/run/ftpd.sock
+    # start rsyslogd
+    rsyslogd
 
-    # placeholder
-    apt-get install -y nginx
-    nginx -g 'daemon off;'
+    # start authd daemon
+    /usr/sbin/pure-authd --run /authenticate.py --socket /var/run/ftpd.sock --daemonize
+
+    #/usr/sbin/pure-ftpd --tls=1 --dontresolve --passiveportrange 30000:30009 --maxclientsnumber 5 --maxclientsperip 5  --nochmod --antiwarez --forcepassiveip 0.0.0.0 --daemonize
+
+    #-lextauth:/var/run/ftpd.sock
+
+    # tail messages
+    tail -F /var/log/messages
 
   authenticate.py: |
 {{ .Files.Get "authenticate.py" | trim | indent 4 }}
