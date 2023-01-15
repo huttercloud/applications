@@ -560,7 +560,7 @@ spec:
         # ebooks pv is created in calibre chart!
         - name: calibre-library-ebooks
           persistentVolumeClaim:
-            claimName: calibre}-library-ebooks
+            claimName: calibre-library-ebooks
         - name: {{ .Release.Name }}-readarr
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-readarr
