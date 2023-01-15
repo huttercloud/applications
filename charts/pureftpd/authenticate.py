@@ -21,12 +21,12 @@ AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 AUTHD_ACCOUNT = os.getenv('AUTHD_ACCOUNT')
 AUTHD_PASSWORD = os.getenv('AUTHD_PASSWORD')
 
-def log(message: str, priority: int = syslog.LOG_INFO):
+def send_syslog(message: str):
     """
         send log message to syslog
     """
 
-    syslog.syslog(priority=priority, message=f'pure-ftpd extauth: {message}')
+    syslog.syslog(f'pure-ftpd extauth: {message}')
 
 def return_auth(auth_state: int=1):
     """
@@ -45,7 +45,7 @@ end
 if __name__ == '__main__':
 
     try:
-        log(message=f'authentication for {AUTHD_ACCOUNT} started')
+        send_syslog(message=f'authentication process for {AUTHD_ACCOUNT} started')
 
         auth_payload=dict(
             grant_type='http://auth0.com/oauth/grant-type/password-realm',
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         return_auth()
 
     except Exception as ex:
-        log(message=traceback.format_exc(), priority=syslog.LOG_ERR)
+        send_syslog(message=traceback.format_exc())
         return_auth(auth_state=-1)
 
-    syslog.syslog('pure-ftpd extauth: ended')
+    send_syslog('authentication process ended')
