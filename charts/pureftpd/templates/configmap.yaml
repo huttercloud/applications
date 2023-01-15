@@ -26,4 +26,4 @@ data:
     nginx -g 'daemon off;'
 
   authenticate.py: |
-    {{ .Files.Get "authenticate.py" | nindent 4 }}
+{{ .Files.Get "authenticate.py" | trim | indent 4 }}
