@@ -18,7 +18,7 @@ spec:
     protocol: TCP
     targetPort: 21
     nodePort: 21
-  {{- range untilStep 30000 30009 1 }}
+  {{- range untilStep 30000 30050 1 }}
   - port: {{ . }}
     targetPort: {{ . }}
     protocol: TCP
