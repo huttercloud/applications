@@ -13,6 +13,8 @@ metadata:
     # for a change the oauth2 proxy creates the tls cert as it needs both host names anyways
     # so we dont have to setup two oauth2 ingresses
     cert-manager.io/cluster-issuer: letsencrypt-dns
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header "X-Auth-As: user";
 spec:
   tls:
     - hosts: [{{ .Values.ingress.calibre }}, {{ .Values.ingress.web }}]
@@ -75,9 +77,7 @@ metadata:
     kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-    # nginx.ingress.kubernetes.io/configuration-snippet: |
-    #   proxy_set_header "X-Auth-As: user";
-    nginx.org/server-snippets: |
+    nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header "X-Auth-As: user";
 spec:
   tls:
