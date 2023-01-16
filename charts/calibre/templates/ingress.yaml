@@ -90,3 +90,28 @@ spec:
               name: {{ .Release.Name }}-calibre-web
               port:
                 number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-calibre-opds
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.opds }}]
+      secretName: {{ .Release.Name }}-opds-tls
+  rules:
+    - host: {{ .Values.ingress.opds }}
+      http:
+        paths:
+        - path: /opds
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-calibre-web
+              port:
+                number: 80

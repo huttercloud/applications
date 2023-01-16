@@ -16,3 +16,4 @@ library:
 ingress:
   calibre: calibre-content.hutter.cloud
   web: calibre.hutter.cloud
+  opds: calibre-opds.hutter.cloud
