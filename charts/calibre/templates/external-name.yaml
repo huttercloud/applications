@@ -27,3 +27,16 @@ metadata:
 spec:
   type: ExternalName
   externalName: infra.hutter.cloud
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-external-name-opds
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.opds }}
+    hutter.cloud/dns-service: "aws"
+spec:
+  type: ExternalName
+  externalName: infra.hutter.cloud
