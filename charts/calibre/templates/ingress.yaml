@@ -100,6 +100,10 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: public
     cert-manager.io/cluster-issuer: letsencrypt-dns
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: {{ .Release.Name }}-opds-basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - opds'
+
 spec:
   tls:
     - hosts: [{{ .Values.ingress.opds }}]
@@ -115,3 +119,5 @@ spec:
               name: {{ .Release.Name }}-calibre-web
               port:
                 number: 80
+
+
