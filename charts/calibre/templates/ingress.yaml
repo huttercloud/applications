@@ -112,7 +112,7 @@ spec:
     - host: {{ .Values.ingress.opds }}
       http:
         paths:
-        - path: /
+        - path: /opds
           pathType: Prefix
           backend:
             service:
