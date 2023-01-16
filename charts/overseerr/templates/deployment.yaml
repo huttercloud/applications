@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: overseerr
-        image: "lscr.io/linuxserver/overseerr:version-{{ .Values.overseerr.version }}"
+        image: "lscr.io/linuxserver/overseerr:version-v{{ .Values.overseerr.version }}"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5055
