@@ -497,6 +497,8 @@ spec:
           mountPath: /srv/library/movies
         - name: {{ .Release.Name }}-library-audiobooks
           mountPath: /srv/library/audiobooks
+        - name: {{ .Release.Name }}-library-ebooks
+          mountPath: /srv/library/ebooks
       volumes:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
@@ -510,6 +512,9 @@ spec:
         - name: {{ .Release.Name }}-library-audiobooks
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-library-audiobooks
+        - name: {{ .Release.Name }}-library-ebooks
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-ebooks
 ##
 # readarr
 ##
@@ -552,15 +557,14 @@ spec:
         volumeMounts:
         - name: {{ .Release.Name }}-readarr
           mountPath: /config
-        - name: calibre-library-ebooks
+        - name: {{ .Release.Name }}-library-ebooks
           mountPath: /books
         - name: {{ .Release.Name }}-downloads
           mountPath: /downloads
       volumes:
-        # ebooks pv is created in calibre chart!
-        - name: calibre-library-ebooks
+        - name: {{ .Release.Name }}-library-ebooks
           persistentVolumeClaim:
-            claimName: calibre-library-ebooks
+            claimName: {{ .Release.Name }}-library-ebooks
         - name: {{ .Release.Name }}-readarr
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-readarr
