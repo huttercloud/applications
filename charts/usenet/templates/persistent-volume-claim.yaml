@@ -110,6 +110,20 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: {{ .Release.Name }}-prowlarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 1Gi } }
+##
+# nfs claims
+##
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: {{ .Release.Name }}-library-movies
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}

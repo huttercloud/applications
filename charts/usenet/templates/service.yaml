@@ -117,3 +117,16 @@ spec:
     targetPort: 8787
   selector:
     app: {{ .Release.Name }}-readarr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-prowlarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  ports:
+  - port: 80
+    targetPort: 9696
+  selector:
+    app: {{ .Release.Name }}-prowlarr

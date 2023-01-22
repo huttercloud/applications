@@ -58,7 +58,8 @@ jobs:
             --replace 'sonarr:\s{\sversion:\s\"(.*)\"\s}' SONARR \
             --replace 'radarr:\s{\sversion:\s\"(.*)\"\s}' RADARR \
             --replace 'bazarr:\s{\sversion:\s\"(.*)\"\s}' BAZARR \
-            --replace 'readarr:\s{\sversion:\s\"(.*)\"\s}' READARR
+            --replace 'readarr:\s{\sversion:\s\"(.*)\"\s}' READARR \
+            --replace 'prowlarr:\s{\sversion:\s\"(.*)\"\s}' PROWLARR
 
           python3 update-versions/update-versions.py \
             --file applications/charts/prometheus/Chart.yaml \

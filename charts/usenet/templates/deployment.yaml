@@ -576,3 +576,49 @@ spec:
         - name: {{ .Release.Name }}-downloads
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-downloads
+##
+# readarr
+##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-prowlarr
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-prowlarr
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-prowlarr
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-prowlarr
+    spec:
+      containers:
+      - name: readarr
+        image: "lscr.io/linuxserver/readarr:{{ .Values.prowlarr.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9696
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        # sabznbd needs to run as root to allow loopback mounts
+        # of iso images. as sabnzbd writes wiles with root ownership
+        # radarr and sonarr need to run as root too to allow move
+        # of the downloaded files to plex
+        - name: PUID
+          value: "0"
+        - name: PGID
+          value: "0"
+        volumeMounts:
+        - name: {{ .Release.Name }}-prowlarr
+          mountPath: /config
+      volumes:
+        - name: {{ .Release.Name }}-prowlarr
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-prowlarr
