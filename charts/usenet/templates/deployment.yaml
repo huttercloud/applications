@@ -599,8 +599,8 @@ spec:
         app: {{ .Release.Name }}-prowlarr
     spec:
       containers:
-      - name: readarr
-        image: "lscr.io/linuxserver/readarr:{{ .Values.prowlarr.version }}"
+      - name: prowlarr
+        image: "lscr.io/linuxserver/prowlarr:{{ .Values.prowlarr.version }}"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9696
