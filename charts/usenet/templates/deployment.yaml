@@ -561,10 +561,15 @@ spec:
           mountPath: /books
         - name: {{ .Release.Name }}-downloads
           mountPath: /downloads
+        - name: {{ .Release.Name }}-library-audiobooks
+          mountPath: /audiobooks
       volumes:
         - name: {{ .Release.Name }}-library-ebooks
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-library-ebooks
+        - name: {{ .Release.Name }}-library-audiobooks
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-library-audiobooks
         - name: {{ .Release.Name }}-readarr
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-readarr
