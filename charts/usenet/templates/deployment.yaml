@@ -529,7 +529,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Release.Name }}-readarr
-  replicas: 1
+  replicas: {{ .Values.readarr_replicas }}
   strategy:
     type: Recreate
   template:
@@ -577,7 +577,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-downloads
 ##
-# readarr
+# prowlarr
 ##
 ---
 apiVersion: apps/v1
