@@ -1,0 +1,30 @@
+
+externalName:
+  enabled: false
+
+externalSecret:
+  enabled: false
+
+jenkins:
+  controller:
+    jenkinsAdminEmail: huttersebastian@gmail.com
+    jenkinsUrlProtocol: https
+    additionalPlugins:
+    - oic-auth
+    - plasticscm-plugin
+    - dotnet-sdk
+  persistence:
+    storageClass: persistent
+    accessMode: ReadWriteMany
+  ingress:
+    enabled: true
+    apiVersion: networking.k8s.io/v1
+    hostName: jenkins.hutter.cloud
+    annotations:
+      kubernetes.io/ingress.class: public
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+      tls:
+      - hosts: ["jenkins.hutter.cloud"]
+        secretName: jenkins-tls
+
+

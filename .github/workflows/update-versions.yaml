@@ -97,6 +97,10 @@ jobs:
             --replace 'calibreweb:\s{\sversion:\s\"(.*)\"\s}' CALIBREWEB \
             --replace 'oauth2proxy:\s{\sversion:\s\"(.*)\"\s}' OAUTH2PROXY
 
+        python3 update-versions/update-versions.py \
+            --file applications/charts/jenkins/Chart.yaml \
+            --replace '\s*?version:\s\"(.*)\"' JENKINS
+
       - name: "Create pull request"
         uses: peter-evans/create-pull-request@v4
         with:

@@ -1,0 +1,17 @@
+# create externalname service to allow ext-dns
+# to create a cname record
+{{- if .Values.externalName.enabled -}}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-external-name
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ (index .Values.loki.gateway.ingress.hosts 0).host }}
+    hutter.cloud/dns-service: "aws"
+spec:
+  type: ExternalName
+  externalName: infra.hutter.cloud
+{{- end }}
