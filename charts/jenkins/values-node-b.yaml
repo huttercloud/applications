@@ -5,6 +5,9 @@ externalName:
 externalSecret:
   enabled: true
 
+adminClusterRoleBinding:
+  enabled: true
+
 jenkins:
   controller:
     jenkinsAdminEmail: huttersebastian@gmail.com
