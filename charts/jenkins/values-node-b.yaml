@@ -1,9 +1,6 @@
 
 externalName:
-  enabled: false
-
-externalSecret:
-  enabled: false
+  enabled: true
 
 jenkins:
   controller:
