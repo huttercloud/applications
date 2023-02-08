@@ -1,6 +1,6 @@
 # Default values for node-b.
 
-calibre: { version: "6.11.0" }
+calibre: { version: "6.12.0" }
 calibreweb: { version: "0.6.19" }
 oauth2proxy: { version: "v7.4.0" }
 
