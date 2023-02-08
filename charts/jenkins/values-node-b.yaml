@@ -10,6 +10,7 @@ jenkins:
     - oic-auth
     - plasticscm-plugin
     - dotnet-sdk
+    - kubernetes-credentials-provider
     ingress:
       enabled: true
       apiVersion: networking.k8s.io/v1
