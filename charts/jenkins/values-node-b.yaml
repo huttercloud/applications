@@ -2,6 +2,9 @@
 externalName:
   enabled: true
 
+externalSecret:
+  enabled: true
+
 jenkins:
   controller:
     jenkinsAdminEmail: huttersebastian@gmail.com
