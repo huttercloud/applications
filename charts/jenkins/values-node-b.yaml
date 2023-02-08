@@ -17,6 +17,26 @@ jenkins:
     - plasticscm-plugin
     - dotnet-sdk
     - kubernetes-credentials-provider
+    - matrix-auth
+    JCasC:
+      securityRealm: |-
+        oic:
+          authorizationServerUrl: "https://hutter-cloud.eu.auth0.com/authorize"
+          automanualconfigure: "auto"
+          clientId: "${jenkins-auth0-client-id}"
+          clientSecret: "${jenkins-auth0-client-secret}"
+          disableSslVerification: false
+          emailFieldName: "email"
+          fullNameFieldName: "name"
+          logoutFromOpenidProvider: false
+          overrideScopes: "openid email profile"
+          overrideScopesDefined: true
+          scopes: "openid profile email"
+          tokenAuthMethod: "client_secret_post"
+          tokenServerUrl: "https://hutter-cloud.eu.auth0.com/oauth/token"
+          userInfoServerUrl: "https://hutter-cloud.eu.auth0.com/userinfo"
+          userNameField: "email"
+          wellKnownOpenIDConfigurationUrl: "https://hutter-cloud.eu.auth0.com/.well-known/openid-configuration"
     ingress:
       enabled: true
       apiVersion: networking.k8s.io/v1
@@ -27,25 +47,6 @@ jenkins:
       tls:
       - hosts: ["jenkins.hutter.cloud"]
         secretName: jenkins-tls
-      JCasC:
-        securityRealm: |-
-          oic:
-            authorizationServerUrl: "https://hutter-cloud.eu.auth0.com/authorize"
-            automanualconfigure: "auto"
-            clientId: "${jenkins-auth0-client-id}"
-            clientSecret: "${jenkins-auth0-client-secret}"
-            disableSslVerification: false
-            emailFieldName: "email"
-            fullNameFieldName: "name"
-            logoutFromOpenidProvider: false
-            overrideScopes: "openid email profile"
-            overrideScopesDefined: true
-            scopes: "openid profile email"
-            tokenAuthMethod: "client_secret_post"
-            tokenServerUrl: "https://hutter-cloud.eu.auth0.com/oauth/token"
-            userInfoServerUrl: "https://hutter-cloud.eu.auth0.com/userinfo"
-            userNameField: "email"
-            wellKnownOpenIDConfigurationUrl: "https://hutter-cloud.eu.auth0.com/.well-known/openid-configuration"
   persistence:
     storageClass: persistent
     accessMode: ReadWriteMany
