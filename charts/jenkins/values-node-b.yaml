@@ -20,9 +20,9 @@ jenkins:
       annotations:
         kubernetes.io/ingress.class: public
         cert-manager.io/cluster-issuer: letsencrypt-dns
-        tls:
-        - hosts: ["jenkins.hutter.cloud"]
-          secretName: jenkins-tls
+      tls:
+      - hosts: ["jenkins.hutter.cloud"]
+        secretName: jenkins-tls
   persistence:
     storageClass: persistent
     accessMode: ReadWriteMany
