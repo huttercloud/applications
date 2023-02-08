@@ -6,7 +6,7 @@ externalSecret:
   enabled: true
 
 adminClusterRoleBinding:
-  enabled: false
+  enabled: true
 
 jenkins:
   controller:
