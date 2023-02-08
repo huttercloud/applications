@@ -1,6 +1,7 @@
 # allow the jenkins service account full admin permissions
 
 {{- if .Values.adminClusterRoleBinding.enabled -}}
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
