@@ -18,7 +18,7 @@ jenkins:
     - dotnet-sdk
     - kubernetes-credentials-provider
     - matrix-auth
-    javaOpts: "-Xms2048m -Xmx2048m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxHeapFreeRatio=70 -XX:MinHeapFreeRatio=40"
+    javaOpts: "-Xms4096m -Xmx4096m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxHeapFreeRatio=70 -XX:MinHeapFreeRatio=40"
     additionalExistingSecrets:
     - name: jenkins-auth0-client
       keyName: clientId
@@ -53,6 +53,10 @@ jenkins:
       tls:
       - hosts: ["jenkins.hutter.cloud"]
         secretName: jenkins-tls
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 4096Mi
   persistence:
     storageClass: persistent
     accessMode: ReadWriteMany
