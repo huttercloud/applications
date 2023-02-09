@@ -18,6 +18,7 @@ jenkins:
     - dotnet-sdk
     - kubernetes-credentials-provider
     - matrix-auth
+    javaOpts: "-Xms2048m -Xmx2048m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxHeapFreeRatio=70 -XX:MinHeapFreeRatio=40"
     additionalExistingSecrets:
     - name: jenkins-auth0-client
       keyName: clientId
