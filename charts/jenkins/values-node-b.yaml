@@ -12,10 +12,13 @@ jenkins:
   controller:
     jenkinsAdminEmail: huttersebastian@gmail.com
     jenkinsUrlProtocol: https
+    nstallPlugins:
+    - kubernetes
+    - workflow-aggregator
+    - git
+    - configuration-as-code
     additionalPlugins:
     - oic-auth
-    # will be using gitsync instead as the plasticscm integration seems to be completely broken!
-    #- plasticscm-plugin
     - dotnet-sdk
     - kubernetes-credentials-provider
     - matrix-auth
