@@ -34,6 +34,16 @@ jenkins:
       configScripts:
         tool-configuration: |-
           tool:
+            cmtool:
+              installations:
+              - home: "cm"
+                name: "Default"
+                properties:
+                - installSource:
+                    installers:
+                    - cm:
+                        ignoreSystemTool: true
+                useInvariantCulture: true
             dotNetConfiguration:
               buildAllowed: true
               cleanAllowed: true
