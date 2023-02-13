@@ -12,7 +12,7 @@ jenkins:
   controller:
     jenkinsAdminEmail: huttersebastian@gmail.com
     jenkinsUrlProtocol: https
-    nstallPlugins:
+    installPlugins:
     - kubernetes
     - workflow-aggregator
     - git
