@@ -23,13 +23,35 @@ jenkins:
     - kubernetes-credentials-provider
     - matrix-auth
     - github
-    - plasticscm-plugin
+    - aws-secrets-manager-credentials-provider
+    # no secret source config, instead for jcasc i use kubernetes secrets
+    #- aws-secrets-manager-secret-source
+    - blueocean
     javaOpts: "-Xms4096m -Xmx4096m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxHeapFreeRatio=70 -XX:MinHeapFreeRatio=40"
     additionalExistingSecrets:
+    # auth0 secrets are used in JCaSC configuration
     - name: jenkins-auth0-client
       keyName: clientId
     - name: jenkins-auth0-client
       keyName: clientSecret
+    # extra env vars are used for aws secret source configuration
+    # the aws secret manager configuration is us
+    containerEnv:
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: jenkins-iam-secrets-manager
+          key: accessKeyId
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: jenkins-iam-secrets-manager
+          key: secretAccessKey
+    - name: AWS_DEFAULT_REGION
+      valueFrom:
+        secretKeyRef:
+          name: jenkins-iam-secrets-manager
+          key: defaultRegion
     JCasC:
       configScripts:
         tool-configuration: |-
