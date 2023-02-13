@@ -106,6 +106,13 @@ jenkins:
             mavenGlobalConfig:
               globalSettingsProvider: "standard"
               settingsProvider: "standard"
+        unclassified-configuration: |-
+          unclassified:
+            awsCredentialsProvider:
+              cache: true
+              client:
+                credentialsProvider: "default"
+                region: "eu-central-1"
       securityRealm: |-
         oic:
           authorizationServerUrl: "https://hutter-cloud.eu.auth0.com/authorize"
