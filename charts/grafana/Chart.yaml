@@ -2,9 +2,9 @@ apiVersion: v2
 name: grafana
 description: install grafana helm chart as dependency
 type: application
-version: "6.52.2"
+version: "6.52.4"
 
 dependencies:
 - name: grafana
-  version: "6.52.2"
+  version: "6.52.4"
   repository: "https://grafana.github.io/helm-charts"
