@@ -21,4 +21,4 @@ library:
 ingress:
   host: usenet.hutter.cloud
 
-readarr_replicas: 0
+readarr_replicas: 1
