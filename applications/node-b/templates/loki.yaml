@@ -1,20 +1,20 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: {{ .Values.spec.applicationPrefix }}-loki
-  namespace: default
-spec:
-  project: default
-  syncPolicy:
-    automated: {}
-  source:
-    repoURL: git@github.com:huttercloud/applications.git
-    targetRevision: HEAD
-    path: charts/loki
-    helm:
-      releaseName: loki
-      valueFiles:
-        - {{ .Values.spec.valuesFile }}
-  destination:
-    server: {{ .Values.spec.destination.server }}
-    namespace: default
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: {{ .Values.spec.applicationPrefix }}-loki
+#   namespace: default
+# spec:
+#   project: default
+#   syncPolicy:
+#     automated: {}
+#   source:
+#     repoURL: git@github.com:huttercloud/applications.git
+#     targetRevision: HEAD
+#     path: charts/loki
+#     helm:
+#       releaseName: loki
+#       valueFiles:
+#         - {{ .Values.spec.valuesFile }}
+#   destination:
+#     server: {{ .Values.spec.destination.server }}
+#     namespace: default
