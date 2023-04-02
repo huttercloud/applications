@@ -99,6 +99,24 @@ jenkins:
                   }
                 }
               }
+          - script: >
+              pipelineJob('infrastructure/upgrade-systems') {
+                definition {
+                  cpsScm {
+                    scriptPath('.pipelines/ansible/upgrade-systems.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
         nodes: |-
           jenkins:
             nodes:
