@@ -104,6 +104,11 @@ jenkins:
             nodes:
             - permanent:
                 labelString: "node-a"
+                nodeProperties:
+                - envVars:
+                    env:
+                    - key: "PATH"
+                      value: "/var/lib/jenkins/venv/bin:$PATH"
                 launcher:
                   ssh:
                     credentialsId: "jenkinsci-ssh-key"
@@ -116,6 +121,11 @@ jenkins:
                 retentionStrategy: "always"
             - permanent:
                 labelString: "node-b"
+                nodeProperties:
+                - envVars:
+                    env:
+                    - key: "PATH"
+                      value: "/var/lib/jenkins/venv/bin:$PATH"
                 launcher:
                   ssh:
                     credentialsId: "jenkinsci-ssh-key"
@@ -128,6 +138,11 @@ jenkins:
                 retentionStrategy: "always"
             - permanent:
                 labelString: "node-c"
+                nodeProperties:
+                - envVars:
+                    env:
+                    - key: "PATH"
+                      value: "/var/lib/jenkins/venv/bin:$PATH"
                 launcher:
                   ssh:
                     credentialsId: "jenkinsci-ssh-key"
@@ -140,6 +155,11 @@ jenkins:
                 retentionStrategy: "always"
             - permanent:
                 labelString: "plex"
+                nodeProperties:
+                - envVars:
+                    env:
+                    - key: "PATH"
+                      value: "/var/lib/jenkins/venv/bin:$PATH"
                 launcher:
                   ssh:
                     credentialsId: "jenkinsci-ssh-key"
