@@ -146,6 +146,7 @@ jenkins:
                     host: "plex.hutter.cloud"
                     port: 22
                     sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+                    javaPath: "/opt/homebrew/opt/openjdk@11/bin/java"
                 mode: EXCLUSIVE
                 name: "plex.hutter.cloud"
                 remoteFS: "/var/lib/jenkins"
