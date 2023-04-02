@@ -18,6 +18,7 @@ jenkins:
     - kubernetes:3883.v4d70a_a_a_df034
     - kubernetes-client-api:6.4.1-208.vfe09a_9362c2c
     - ssh-agent
+    - ssh-slaves
     - workflow-aggregator
     - git
     - configuration-as-code
