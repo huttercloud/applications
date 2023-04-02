@@ -71,7 +71,7 @@ jenkins:
               client:
                 credentialsProvider: "default"
                 region: "eu-central-1"
-        casc-jobs: |
+        casc-jobs: |-
           jobs:
           - script: >
               folder('infrastructure')
