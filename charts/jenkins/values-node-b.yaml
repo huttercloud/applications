@@ -28,7 +28,7 @@ jenkins:
     # no secret source config, instead for jcasc i use kubernetes secrets
     #- aws-secrets-manager-secret-source
     - blueocean
-    javaOpts: "-Xms4096m -Xmx4096m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxHeapFreeRatio=70 -XX:MinHeapFreeRatio=40"
+    javaOpts: "-Xms3072m -Xmx3072m -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxHeapFreeRatio=70 -XX:MinHeapFreeRatio=40"
     additionalExistingSecrets:
     # auth0 secrets are used in JCaSC configuration
     - name: jenkins-auth0-client
