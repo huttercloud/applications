@@ -24,6 +24,7 @@ jenkins:
     - matrix-auth
     - github
     - aws-secrets-manager-credentials-provider
+    - ansible
     # no secret source config, instead for jcasc i use kubernetes secrets
     #- aws-secrets-manager-secret-source
     - blueocean
@@ -56,49 +57,6 @@ jenkins:
       configScripts:
         tool-configuration: |-
           tool:
-            cmtool:
-              installations:
-              - home: "cm"
-                name: "Default"
-                properties:
-                - installSource:
-                    installers:
-                    - cm:
-                        ignoreSystemTool: true
-                useInvariantCulture: true
-            dotNetConfiguration:
-              buildAllowed: true
-              cleanAllowed: true
-              listPackageAllowed: true
-              nuGetDeleteAllowed: true
-              nuGetLocalsAllowed: true
-              nuGetPushAllowed: true
-              packAllowed: true
-              publishAllowed: true
-              restoreAllowed: true
-              telemetryOptOut: true
-              testAllowed: true
-              toolRestoreAllowed: true
-            dotnetsdk:
-              installations:
-              - name: "net7"
-                properties:
-                - installSource:
-                    installers:
-                    - installDotNetSDK:
-                        release: "7.0.2"
-                        sdk: "7.0.102"
-                        url: "https://download.visualstudio.microsoft.com/download/pr/c646b288-5d5b-4c9c-a95b-e1fad1c0d95d/e13d71d48b629fe3a85f5676deb09e2d/dotnet-sdk-7.0.102-linux-x64.tar.gz"
-                        version: ".NET 7.0"
-              - name: "net6"
-                properties:
-                - installSource:
-                    installers:
-                    - installDotNetSDK:
-                        release: "6.0.13"
-                        sdk: "6.0.405"
-                        url: "https://download.visualstudio.microsoft.com/download/pr/c7f21771-9b09-4c81-883b-90dff8760c1e/fe992d38a94cc6f301c0236db3920c0a/dotnet-sdk-6.0.405-linux-x64.tar.gz"
-                        version: ".NET 6.0"
             git:
               installations:
               - home: "git"
