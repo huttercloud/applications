@@ -112,7 +112,7 @@ jenkins:
                     sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
                 mode: EXCLUSIVE
                 name: "node-a.hutter.cloud"
-                remoteFS: "/var/lib/jenkinsci"
+                remoteFS: "/var/lib/jenkins"
                 retentionStrategy: "always"
             - permanent:
                 labelString: "node-b"
@@ -124,7 +124,7 @@ jenkins:
                     sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
                 mode: EXCLUSIVE
                 name: "node-b.hutter.cloud"
-                remoteFS: "/var/lib/jenkinsci"
+                remoteFS: "/var/lib/jenkins"
                 retentionStrategy: "always"
             - permanent:
                 labelString: "node-c"
@@ -136,7 +136,7 @@ jenkins:
                     sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
                 mode: EXCLUSIVE
                 name: "node-c.hutter.cloud"
-                remoteFS: "/var/lib/jenkinsci"
+                remoteFS: "/var/lib/jenkins"
                 retentionStrategy: "always"
             - permanent:
                 labelString: "plex"
@@ -148,7 +148,7 @@ jenkins:
                     sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
                 mode: EXCLUSIVE
                 name: "plex.hutter.cloud"
-                remoteFS: "/var/lib/jenkinsci"
+                remoteFS: "/var/lib/jenkins"
                 retentionStrategy: "always"
       securityRealm: |-
         oic:
