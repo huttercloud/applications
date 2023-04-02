@@ -99,6 +99,56 @@ jenkins:
                   }
                 }
               }
+        nodes: |-
+          nodes:
+          - permanent:
+              labelString: "node-a"
+              launcher:
+                ssh:
+                  credentialsId: "jenkinsci-ssh-key"
+                  host: "node-a.hutter.cloud"
+                  port: 22
+                  sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+              mode: EXCLUSIVE
+              name: "node-a.hutter.cloud"
+              remoteFS: "/var/lib/jenkinsci"
+              retentionStrategy: "always"
+          - permanent:
+              labelString: "node-b"
+              launcher:
+                ssh:
+                  credentialsId: "jenkinsci-ssh-key"
+                  host: "node-b.hutter.cloud"
+                  port: 22
+                  sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+              mode: EXCLUSIVE
+              name: "node-b.hutter.cloud"
+              remoteFS: "/var/lib/jenkinsci"
+              retentionStrategy: "always"
+          - permanent:
+              labelString: "node-c"
+              launcher:
+                ssh:
+                  credentialsId: "jenkinsci-ssh-key"
+                  host: "node-c.hutter.cloud"
+                  port: 22
+                  sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+              mode: EXCLUSIVE
+              name: "node-c.hutter.cloud"
+              remoteFS: "/var/lib/jenkinsci"
+              retentionStrategy: "always"
+          - permanent:
+              labelString: "plex"
+              launcher:
+                ssh:
+                  credentialsId: "jenkinsci-ssh-key"
+                  host: "plex.hutter.cloud"
+                  port: 22
+                  sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+              mode: EXCLUSIVE
+              name: "plex.hutter.cloud"
+              remoteFS: "/var/lib/jenkinsci"
+              retentionStrategy: "always"
       securityRealm: |-
         oic:
           authorizationServerUrl: "https://hutter-cloud.eu.auth0.com/authorize"
