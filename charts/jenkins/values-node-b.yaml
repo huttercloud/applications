@@ -71,6 +71,29 @@ jenkins:
               client:
                 credentialsProvider: "default"
                 region: "eu-central-1"
+        casc-jobs: |
+          jobs:
+          - script: >
+              folder('infrastructure')
+          - script: >
+              pipelineJob('infrastructure/reboot-plex') {
+                definition {
+                  cpsScm {
+                    lightweight(true)
+                    scriptPath('.pipelines/ansible/reboot-plex.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
       securityRealm: |-
         oic:
           authorizationServerUrl: "https://hutter-cloud.eu.auth0.com/authorize"
