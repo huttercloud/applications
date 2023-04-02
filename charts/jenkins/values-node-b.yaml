@@ -12,6 +12,7 @@ jenkins:
   controller:
     jenkinsAdminEmail: huttersebastian@gmail.com
     jenkinsUrlProtocol: https
+    agentListenerNodePort: 50000
     installPlugins:
     # kubernetes is broken https://issues.jenkins.io/browse/JENKINS-70639
     - kubernetes:3845.va_9823979a_744
