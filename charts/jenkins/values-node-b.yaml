@@ -17,6 +17,7 @@ jenkins:
     - workflow-aggregator
     - git
     - configuration-as-code
+    - job-dsl
     additionalPlugins:
     - oic-auth
     - dotnet-sdk
@@ -79,11 +80,10 @@ jenkins:
               pipelineJob('infrastructure/reboot-plex') {
                 definition {
                   cpsScm {
-                    lightweight(true)
                     scriptPath('.pipelines/ansible/reboot-plex.Jenkinsfile')
                     scm {
                       git {
-                        branch('main')
+                        branch('*/main')
                         remote {
                           credentials('github-machine-user-ssh-key')
                           url('git@github.com:huttercloud/infrastructure.git')
