@@ -81,7 +81,9 @@ jenkins:
           jobs:
           - script: >
               folder('infrastructure')
+          - script: >
               folder('infrastructure/ansible')
+          - script: >
               folder('infrastructure/terraform')
           - script: >
               pipelineJob('infrastructure/ansible/reboot-plex') {
@@ -119,7 +121,6 @@ jenkins:
                   }
                 }
               }
-
         nodes: |-
           jenkins:
             nodes:
