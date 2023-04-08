@@ -23,6 +23,7 @@ jenkins:
     - git
     - configuration-as-code
     - job-dsl
+    - ws-cleanup
     additionalPlugins:
     - oic-auth
     - dotnet-sdk
