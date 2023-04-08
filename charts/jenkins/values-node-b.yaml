@@ -123,6 +123,24 @@ jenkins:
                 }
               }
           - script: >
+              pipelineJob('infrastructure/ansible/configure-systems') {
+                definition {
+                  cpsScm {
+                    scriptPath('.pipelines/ansible/configure-systems.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
               pipelineJob('infrastructure/terraform/plan-apply') {
                 definition {
                   cpsScm {
