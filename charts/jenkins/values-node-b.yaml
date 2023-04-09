@@ -22,7 +22,6 @@ jenkins:
     - ssh-slaves
     - workflow-aggregator
     - git
-    - github
     - configuration-as-code
     - job-dsl
     - ws-cleanup
