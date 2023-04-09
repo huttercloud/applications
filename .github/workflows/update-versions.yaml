@@ -102,6 +102,7 @@ jobs:
             --replace '\s*?version:\s\"(.*)\"' JENKINS
 
       - name: "Create pull request"
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           path: applications
@@ -109,5 +110,10 @@ jobs:
           branch: "chore/update-versions-${{ steps.date.outputs.date }}"
           delete-branch: true
           title: "chore: Update versions ${{ steps.date.outputs.date }}"
-          reviewers: |
-            sebastianhutter
+      - name: Auto-Merge Pull Request
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
+
