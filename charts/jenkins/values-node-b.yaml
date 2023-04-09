@@ -79,6 +79,11 @@ jenkins:
               client:
                 credentialsProvider: "default"
                 region: "eu-central-1"
+            gitHubPluginConfig:
+              configs:
+              - credentialsId: "github-machine-user-webhook-pat"
+                name: "github"
+              hookUrl: "https://jenkins.hutter.cloud/github-webhook/"
         casc-jobs: |-
           jobs:
           - script: >
@@ -87,6 +92,8 @@ jenkins:
               folder('infrastructure/ansible')
           - script: >
               folder('infrastructure/terraform')
+          - script: >
+              folder('AGD')
           - script: >
               pipelineJob('infrastructure/ansible/reboot-plex') {
                 definition {
