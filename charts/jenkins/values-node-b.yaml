@@ -181,7 +181,7 @@ jenkins:
                   }
                 }
                 triggers {
-                    githubPush()
+                  githubPush()
                 }
               }
         nodes: |-
