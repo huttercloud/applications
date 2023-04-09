@@ -15,8 +15,8 @@ jenkins:
     agentListenerServiceType: "NodePort"
     installPlugins:
     # Locked versions to work around https://issues.jenkins.io/browse/JENKINS-70639
-    - kubernetes-client-api:6.3.1-206.v76d3b_6b_14db_b
-    - kubernetes:3845.va_9823979a_744
+    - kubernetes-client-api
+    - kubernetes
     - ssh-agent
     - ssh-slaves
     - workflow-aggregator
