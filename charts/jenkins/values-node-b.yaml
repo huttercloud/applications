@@ -172,9 +172,9 @@ jenkins:
                   github {
                     id('agd-godot4-demo')
                     repoOwner('sebastianhutter')
-                    repository('godot4-dmeo')
+                    repository('godot4-demo')
                     checkoutCredentialsId('github-machine-user-pat')
-                    scanCredentialsId('github-machine-user-webhook-pat')
+                    scanCredentialsId('github-machine-user-pat')
                   }
                 }
                 factory {
