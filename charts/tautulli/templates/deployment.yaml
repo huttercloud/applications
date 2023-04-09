@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: tautulli
-        image: "ghcr.io/tautulli/tautulli:{{ .Values.tautulli.version }}"
+        image: "tautulli/tautulli:{{ .Values.tautulli.version }}"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8181
