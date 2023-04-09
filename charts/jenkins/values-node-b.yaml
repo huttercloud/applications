@@ -13,6 +13,7 @@ jenkins:
     jenkinsAdminEmail: huttersebastian@gmail.com
     jenkinsUrlProtocol: https
     agentListenerServiceType: "NodePort"
+    overwritePlugins: true
     installPlugins:
     # Locked versions to work around https://issues.jenkins.io/browse/JENKINS-70639
     - kubernetes-client-api
