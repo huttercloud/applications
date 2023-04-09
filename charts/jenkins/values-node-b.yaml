@@ -186,9 +186,6 @@ jenkins:
                     numToKeep(5)
                   }
                 }
-                triggers {
-                  githubPush()
-                }
               }
         nodes: |-
           jenkins:
