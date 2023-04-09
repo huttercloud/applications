@@ -168,37 +168,21 @@ jenkins:
               }
           - script: >
               multibranchPipelineJob('AGD/godot4-demo') {
-                  branchSources {
-                      source {
-                          git {
-                              id('godot4-demo')
-                              remote('git@github.com:sebastianhutter/godot4-demo.git')
-                              credentialsId('github-machine-user-ssh-key')
-                              traits {
-                                  gitBranchDiscovery {
-                                      strategyId(1) // Discover branches, but not tags
-                                  }
-                              }
-                          }
-                      }
+                branchSources {
+                  github {
+                    repoOwner('sebastianhutter')
+                    repository('godot4-dmeo')
+                    checkoutCredentialsId('github-machine-user-pat')
                   }
-                  orphanedItemStrategy {
-                      discardOldItems {
-                          numToKeep(5)
-                      }
+                }
+                orphanedItemStrategy {
+                  discardOldItems {
+                    numToKeep(5)
                   }
-                  triggers {
-                      periodicFolderTrigger {
-                          interval('1d')
-                      }
-                  }
-                  properties {
-                      pipelineTriggersJobProperty {
-                          triggers {
-                              githubPush()
-                          }
-                      }
-                  }
+                }
+                triggers {
+                    githubPush()
+                }
               }
         nodes: |-
           jenkins:
