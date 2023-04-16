@@ -194,9 +194,13 @@ jenkins:
                         }
                       }
                     }
-
+                    buildStrategies {
+                      buildRegularBranches()
+                      buildTags {
+                        atMostDays(7)
+                      }
+                    }
                   }
-
                 }
                 factory {
                   workflowBranchProjectFactory {
