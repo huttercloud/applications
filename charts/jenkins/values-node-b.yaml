@@ -197,6 +197,7 @@ jenkins:
                     buildStrategies {
                       buildRegularBranches()
                       buildTags {
+                        atLeastDays(0)
                         atMostDays(7)
                       }
                     }
