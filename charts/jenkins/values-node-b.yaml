@@ -195,7 +195,9 @@ jenkins:
                       }
                     }
                     buildStrategies {
-                      buildRegularBranches()
+                      buildTags {
+                        atMostDays(7)
+                      }
                     }
                   }
                 }
