@@ -196,7 +196,7 @@ jenkins:
                     }
                     buildStrategies {
                       buildTags {
-                        atLeastDays('7')
+
                         atMostDays('14')
                       }
                     }
