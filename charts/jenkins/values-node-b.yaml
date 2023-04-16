@@ -167,7 +167,37 @@ jenkins:
                   }
                 }
               }
+          - script: >
+              multibranchPipelineJob('AGD/godot4-demo') {
+                branchSources {
+                  branchSource {
+                    source {
+                      github {
+                        id('agd-godot4-demo')
+                        repoOwner('sebastianhutter')
+                        repository('godot4-demo')
+                        credentialsId('github-machine-user-pat')
+                        traits {
+                          gitTagDiscovery()
+                          gitBranchDiscovery()
+                        }
+                      }
+                    }
 
+                  }
+
+                }
+                factory {
+                  workflowBranchProjectFactory {
+                    scriptPath('Jenkinsfile')
+                  }
+                }
+                orphanedItemStrategy {
+                  discardOldItems {
+                    numToKeep(5)
+                  }
+                }
+              }
         nodes: |-
           jenkins:
             nodes:
