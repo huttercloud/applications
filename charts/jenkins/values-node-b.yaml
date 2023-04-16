@@ -180,8 +180,17 @@ jenkins:
                         credentialsId('github-machine-user-pat')
                         repositoryUrl('https://github.com/sebastianhutter/godot4-demo.git')
                         traits {
-                          gitTagDiscovery()
-                          gitBranchDiscovery()
+                          gitHubTagDiscovery()
+                          gitHubIgnoreDraftPullRequestFilter()
+                          gitHubBranchDiscovery {
+                            strategyId(0)
+                          }
+                          gitHubPullRequestDiscovery {
+                            strategyId(0)
+                          }
+                          gitHubSshCheckout {
+                            credentialsId('github-machine-user-ssh-key')
+                          }
                         }
                       }
                     }
