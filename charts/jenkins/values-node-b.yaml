@@ -169,13 +169,17 @@ jenkins:
               }
           - script: >
               multibranchPipelineJob('AGD/godot4-demo') {
-                branchSources {
-                  github {
-                    id('agd-godot4-demo')
-                    repoOwner('sebastianhutter')
-                    repository('godot4-demo')
-                    checkoutCredentialsId('github-machine-user-pat')
-                    scanCredentialsId('github-machine-user-pat')
+                branchSource {
+                  source {
+                    github {
+                      id('agd-godot4-demo')
+                      repoOwner('sebastianhutter')
+                      repository('godot4-demo')
+                      credentialsId('github-machine-user-pat')
+                      // branchSOurce uses single credentialsId
+                      // checkoutCredentialsId('github-machine-user-pat')
+                      // scanCredentialsId('github-machine-user-pat')
+                    }
                   }
                 }
                 factory {
