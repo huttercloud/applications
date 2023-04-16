@@ -178,6 +178,7 @@ jenkins:
                         repository('godot4-demo')
                         configuredByUrl(true)
                         credentialsId('github-machine-user-pat')
+                        repositoryUrl('https://github.com/sebastianhutter/godot4-demo.git')
                         traits {
                           gitTagDiscovery()
                           gitBranchDiscovery()
