@@ -177,6 +177,14 @@ jenkins:
                     checkoutCredentialsId('github-machine-user-pat')
                     scanCredentialsId('github-machine-user-pat')
                   }
+                  branchSource {
+                    buildStrategies {
+                      buildRegularBranches()
+                      buildTags {
+                        atMostDays(30)
+                      }
+                    }
+                  }
                 }
                 factory {
                   workflowBranchProjectFactory {
