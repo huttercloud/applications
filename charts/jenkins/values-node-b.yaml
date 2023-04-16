@@ -176,6 +176,7 @@ jenkins:
                         id('agd-godot4-demo')
                         repoOwner('sebastianhutter')
                         repository('godot4-demo')
+                        configuredByUrl(true)
                         credentialsId('github-machine-user-pat')
                         traits {
                           gitTagDiscovery()
