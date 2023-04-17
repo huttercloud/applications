@@ -199,6 +199,7 @@ jenkins:
                         atLeastDays('0')
                         atMostDays('14')
                       }
+                      buildRegularBranches()
                     }
                   }
                 }
