@@ -1,4 +1,4 @@
-overseerr: { version: "1.32.5" }
+overseerr: { version: "1.33.0" }
 oauth2proxy: { version: "v7.4.0" }
 
 ingress:
