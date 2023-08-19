@@ -309,12 +309,12 @@ jenkins:
                   }
                 }
           - script: >
-              multibranchPipelineJob('arg-test') {
+              multibranchPipelineJob('ARG-test') {
                 branchSources {
                   branchSource {
                     source {
                       github {
-                        id('argtest')
+                        id('arg-test')
                         repoOwner('huttercloud')
                         repository('argtest')
                         configuredByUrl(true)
@@ -342,14 +342,6 @@ jenkins:
                       }
                       buildRegularBranches()
                     }
-                    strategy {
-                      allBranchesSame {
-                        suppressAutomaticTriggering {
-                          triggeredBranchesRegex("^$")
-                          strategy("NONE")
-                        }
-                      }
-                    }
                   }
                 }
                 factory {
@@ -359,10 +351,9 @@ jenkins:
                 }
                 orphanedItemStrategy {
                   discardOldItems {
-                    numToKeep(15)
+                    numToKeep(5)
                   }
                 }
-              }
         nodes: |-
           jenkins:
             nodes:
