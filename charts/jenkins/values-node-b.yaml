@@ -309,51 +309,23 @@ jenkins:
                   }
                 }
           - script: >
-              multibranchPipelineJob('ARG-test') {
-                branchSources {
-                  branchSource {
-                    source {
-                      github {
-                        id('arg-test')
-                        repoOwner('huttercloud')
-                        repository('argtest')
-                        configuredByUrl(true)
-                        credentialsId('github-machine-user-pat')
-                        repositoryUrl('https://github.com/huttercloud/argtest.git')
-                        traits {
-                          gitHubTagDiscovery()
-                          gitHubIgnoreDraftPullRequestFilter()
-                          gitHubBranchDiscovery {
-                            strategyId(0)
-                          }
-                          gitHubPullRequestDiscovery {
-                            strategyId(0)
-                          }
-                          gitHubSshCheckout {
-                            credentialsId('github-machine-user-ssh-key')
-                          }
-                        }
-                      }
-                    }
-                    buildStrategies {
-                      buildTags {
-                        atLeastDays('0')
-                        atMostDays('14')
-                      }
-                      buildRegularBranches()
-                    }
-                  }
-                }
-                factory {
-                  workflowBranchProjectFactory {
+              pipelineJob('argtest') {
+                definition {
+                  cpsScm {
                     scriptPath('Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/argtest.git')
+                        }
+                        extensions { }
+                      }
+                    }
                   }
                 }
-                orphanedItemStrategy {
-                  discardOldItems {
-                    numToKeep(5)
-                  }
-                }
+              }
         nodes: |-
           jenkins:
             nodes:
