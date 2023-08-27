@@ -1,5 +1,5 @@
 apiVersion: v2
-name: hello-world
+name: arg-grafana
 description: test application deployment
 type: application
 version: 0.1.0
