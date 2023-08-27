@@ -13,4 +13,4 @@ metadata:
     hutter.cloud/dns-service: "aws"
 spec:
   type: ExternalName
-  externalName: grafana-rqarg.hutter.cloud
+  externalName: infra.hutter.cloud
