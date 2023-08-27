@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Release.Name }}-grafana
+  name: {{ .Release.Name }}-grafana-rqarg
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:

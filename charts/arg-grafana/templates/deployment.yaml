@@ -30,11 +30,11 @@ spec:
         - name: TZ
           value: Europe/Zurich
         volumeMounts:
-        - name: {{ .Release.Name }}-grafana
+        - name:  {{ .Release.Name }}-grafana-rqarg
           mountPath: /var/lib/grafana
 
       volumes:
-        - name: {{ .Release.Name }}-grafana
+        - name:  {{ .Release.Name }}-grafana-rqarg
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-grafana
+            claimName:  {{ .Release.Name }}-grafana-rqarg
 
