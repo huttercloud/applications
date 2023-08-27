@@ -1,0 +1,40 @@
+##
+# grafana service for arg monitoring content server
+##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-grafana
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-grafana
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-grafana
+    spec:
+      containers:
+      - name: grafana
+        image: "grafana/grafana-oss:latest"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-grafana
+          mountPath: /var/lib/grafana
+
+      volumes:
+        - name: {{ .Release.Name }}-grafana
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-grafana
+

@@ -1,0 +1,14 @@
+#
+# setup {{ .Values.storage_class_name }} volume claims for all services
+#
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-grafana
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+spec:
+  storageClassName: {{ .Values.storage_class_name }}
+  accessModes: [ReadWriteMany]
+  resources: { requests: { storage: 5Gi } }

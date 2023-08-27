@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.spec.applicationPrefix }}-arg-grafana
+  namespace: default
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    repoURL: git@github.com:huttercloud/applications.git
+    targetRevision: HEAD
+    path: charts/arg-grafana
+    helm:
+      releaseName: arg-grafana
+      valueFiles:
+        - {{ .Values.spec.valuesFile }}
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: default
