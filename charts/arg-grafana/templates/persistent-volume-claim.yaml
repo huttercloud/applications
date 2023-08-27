@@ -9,6 +9,6 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
-  storageClassName: {{ .Values.storage_class_name }}
+  storageClassName: persistent
   accessModes: [ReadWriteMany]
   resources: { requests: { storage: 5Gi } }
