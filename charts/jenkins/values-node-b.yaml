@@ -96,6 +96,78 @@ jenkins:
               folder('infrastructure/terraform')
           - script: >
               folder('AGD')
+          - script: >
+              pipelineJob('infrastructure/ansible/reboot-plex') {
+                definition {
+                  cpsScm {
+                    scriptPath('.pipelines/ansible/reboot-plex.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('infrastructure/ansible/upgrade-systems') {
+                definition {
+                  cpsScm {
+                    scriptPath('.pipelines/ansible/upgrade-systems.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('infrastructure/ansible/configure-systems') {
+                definition {
+                  cpsScm {
+                    scriptPath('.pipelines/ansible/configure-systems.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('infrastructure/terraform/plan-apply') {
+                definition {
+                  cpsScm {
+                    scriptPath('.pipelines/terraform/plan-apply.Jenkinsfile')
+                    scm {
+                      git {
+                        branch('*/main')
+                        remote {
+                          credentials('github-machine-user-ssh-key')
+                          url('git@github.com:huttercloud/infrastructure.git')
+                        }
+                        extensions { }
+                      }
+                    }
+                  }
+                }
+              }
 
         nodes: |-
           jenkins:
