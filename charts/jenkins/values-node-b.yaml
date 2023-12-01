@@ -168,99 +168,99 @@ jenkins:
                   }
                 }
               }
-        #   - script: >
-        #       multibranchPipelineJob('AGD/godot4-demo') {
-        #         branchSources {
-        #           branchSource {
-        #             source {
-        #               github {
-        #                 id('agd-godot4-demo')
-        #                 repoOwner('sebastianhutter')
-        #                 repository('godot4-demo')
-        #                 configuredByUrl(true)
-        #                 credentialsId('github-machine-user-pat')
-        #                 repositoryUrl('https://github.com/sebastianhutter/godot4-demo.git')
-        #                 traits {
-        #                   gitHubTagDiscovery()
-        #                   gitHubIgnoreDraftPullRequestFilter()
-        #                   gitHubBranchDiscovery {
-        #                     strategyId(0)
-        #                   }
-        #                   gitHubPullRequestDiscovery {
-        #                     strategyId(0)
-        #                   }
-        #                   gitHubSshCheckout {
-        #                     credentialsId('github-machine-user-ssh-key')
-        #                   }
-        #                 }
-        #               }
-        #             }
-        #             buildStrategies {
-        #               buildTags {
-        #                 atLeastDays('0')
-        #                 atMostDays('14')
-        #               }
-        #               buildRegularBranches()
-        #             }
-        #           }
-        #         }
-        #         factory {
-        #           workflowBranchProjectFactory {
-        #             scriptPath('Jenkinsfile')
-        #           }
-        #         }
-        #         orphanedItemStrategy {
-        #           discardOldItems {
-        #             numToKeep(5)
-        #           }
-        #         }
-        #       }
-          - script: >
-              multibranchPipelineJob('AGD/tower-defense') {
-                branchSources {
-                  branchSource {
-                    source {
-                      github {
-                        id('agd-tower-defense')
-                        repoOwner('sebastianhutter')
-                        repository('tower-defense')
-                        configuredByUrl(true)
-                        credentialsId('github-machine-user-pat')
-                        repositoryUrl('https://github.com/sebastianhutter/tower-defense.git')
-                        traits {
-                          gitHubTagDiscovery()
-                          gitHubIgnoreDraftPullRequestFilter()
-                          gitHubBranchDiscovery {
-                            strategyId(0)
-                          }
-                          gitHubPullRequestDiscovery {
-                            strategyId(0)
-                          }
-                          gitHubSshCheckout {
-                            credentialsId('github-machine-user-ssh-key')
-                          }
-                        }
-                      }
-                    }
-                    buildStrategies {
-                      buildTags {
-                        atLeastDays('0')
-                        atMostDays('14')
-                      }
-                      buildRegularBranches()
-                    }
-                  }
-                }
-                factory {
-                  workflowBranchProjectFactory {
-                    scriptPath('Jenkinsfile')
-                  }
-                }
-                orphanedItemStrategy {
-                  discardOldItems {
-                    numToKeep(5)
-                  }
-                }
+#   - script: >
+#       multibranchPipelineJob('AGD/godot4-demo') {
+#         branchSources {
+#           branchSource {
+#             source {
+#               github {
+#                 id('agd-godot4-demo')
+#                 repoOwner('sebastianhutter')
+#                 repository('godot4-demo')
+#                 configuredByUrl(true)
+#                 credentialsId('github-machine-user-pat')
+#                 repositoryUrl('https://github.com/sebastianhutter/godot4-demo.git')
+#                 traits {
+#                   gitHubTagDiscovery()
+#                   gitHubIgnoreDraftPullRequestFilter()
+#                   gitHubBranchDiscovery {
+#                     strategyId(0)
+#                   }
+#                   gitHubPullRequestDiscovery {
+#                     strategyId(0)
+#                   }
+#                   gitHubSshCheckout {
+#                     credentialsId('github-machine-user-ssh-key')
+#                   }
+#                 }
+#               }
+#             }
+#             buildStrategies {
+#               buildTags {
+#                 atLeastDays('0')
+#                 atMostDays('14')
+#               }
+#               buildRegularBranches()
+#             }
+#           }
+#         }
+#         factory {
+#           workflowBranchProjectFactory {
+#             scriptPath('Jenkinsfile')
+#           }
+#         }
+#         orphanedItemStrategy {
+#           discardOldItems {
+#             numToKeep(5)
+#           }
+#         }
+#       }
+#   - script: >
+#       multibranchPipelineJob('AGD/tower-defense') {
+#         branchSources {
+#           branchSource {
+#             source {
+#               github {
+#                 id('agd-tower-defense')
+#                 repoOwner('sebastianhutter')
+#                 repository('tower-defense')
+#                 configuredByUrl(true)
+#                 credentialsId('github-machine-user-pat')
+#                 repositoryUrl('https://github.com/sebastianhutter/tower-defense.git')
+#                 traits {
+#                   gitHubTagDiscovery()
+#                   gitHubIgnoreDraftPullRequestFilter()
+#                   gitHubBranchDiscovery {
+#                     strategyId(0)
+#                   }
+#                   gitHubPullRequestDiscovery {
+#                     strategyId(0)
+#                   }
+#                   gitHubSshCheckout {
+#                     credentialsId('github-machine-user-ssh-key')
+#                   }
+#                 }
+#               }
+#             }
+#             buildStrategies {
+#               buildTags {
+#                 atLeastDays('0')
+#                 atMostDays('14')
+#               }
+#               buildRegularBranches()
+#             }
+#           }
+#         }
+#         factory {
+#           workflowBranchProjectFactory {
+#             scriptPath('Jenkinsfile')
+#           }
+#         }
+#         orphanedItemStrategy {
+#           discardOldItems {
+#             numToKeep(5)
+#           }
+#         }
         nodes: |-
           jenkins:
             nodes:
