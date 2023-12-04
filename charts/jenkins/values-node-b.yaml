@@ -74,6 +74,19 @@ jenkins:
             mavenGlobalConfig:
               globalSettingsProvider: "standard"
               settingsProvider: "standard"
+        security-configuration: |-
+          security:
+            apiToken:
+              creationOfLegacyTokenEnabled: false
+              tokenGenerationOnCreationEnabled: false
+              usageStatisticsEnabled: true
+            gitHooks:
+              allowedOnAgents: false
+              allowedOnController: false
+            gitHostKeyVerificationConfiguration:
+              sshHostKeyVerificationStrategy: "noHostKeyVerificationStrategy"
+            globalJobDslSecurityConfiguration:
+              useScriptSecurity: true
         unclassified-configuration: |-
           unclassified:
             awsCredentialsProvider:
@@ -358,6 +371,7 @@ jenkins:
           userInfoServerUrl: "https://hutter-cloud.eu.auth0.com/userinfo"
           userNameField: "email"
           wellKnownOpenIDConfigurationUrl: "https://hutter-cloud.eu.auth0.com/.well-known/openid-configuration"
+
     ingress:
       enabled: true
       apiVersion: networking.k8s.io/v1
