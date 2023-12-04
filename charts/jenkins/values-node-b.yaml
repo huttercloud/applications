@@ -77,7 +77,6 @@ jenkins:
         security-configuration: |-
           security:
             apiToken:
-              creationOfLegacyTokenEnabled: false
               tokenGenerationOnCreationEnabled: false
               usageStatisticsEnabled: true
             gitHooks:
