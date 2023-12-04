@@ -74,6 +74,10 @@ jenkins:
             mavenGlobalConfig:
               globalSettingsProvider: "standard"
               settingsProvider: "standard"
+        security-configuration: |-
+          security:
+            gitHostKeyVerificationConfiguration:
+              sshHostKeyVerificationStrategy: "noHostKeyVerificationStrategy"
         unclassified-configuration: |-
           unclassified:
             awsCredentialsProvider:
