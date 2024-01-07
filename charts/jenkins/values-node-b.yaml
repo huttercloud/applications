@@ -343,7 +343,7 @@ jenkins:
               - envVars:
                   env:
                   - key: "OP_CONNECT_HOST"
-                    value: "https://1password-connect.hutter.cloud"
+                    value: "http://1password-connect.hutter.cloud"
       securityRealm: |-
         oic:
           authorizationServerUrl: "https://hutter-cloud.eu.auth0.com/authorize"
