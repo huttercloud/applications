@@ -2,7 +2,7 @@
 
 calibre: { version: "7.5.1" }
 calibreweb: { version: "0.6.21" }
-oauth2proxy: { version: "v7.5.1" }
+oauth2proxy: { version: "v7.6.0" }
 
 
 
