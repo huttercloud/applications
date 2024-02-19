@@ -3,7 +3,7 @@
 oauth2:
   enabled: true
   # single line oauth2 proxy version for update-versions script
-  proxy: { version: "v7.5.1" }
+  proxy: { version: "v7.6.0" }
 
 externalName:
   enabled: true

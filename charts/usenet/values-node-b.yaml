@@ -2,11 +2,11 @@
 
 sabnzbd: { version: "4.2.2" }
 nzbtomedia: { version: "12.1.12" }
-oauth2proxy: { version: "v7.5.1" }
-nzbhydra2: { version: "5.3.7" }
+oauth2proxy: { version: "v7.6.0" }
+nzbhydra2: { version: "5.3.8" }
 filebrowser: { version: "v2.27.0" }
 sonarr: { version: "4.0.1" }
-radarr: { version: "5.2.6" }
+radarr: { version: "5.3.6" }
 bazarr: { version: "1.4.1" }
 readarr: { version: "0.3.18-develop" }
 prowlarr: { version: "1.0.1"}
