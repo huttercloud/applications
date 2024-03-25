@@ -3,12 +3,12 @@
 sabnzbd: { version: "4.2.3" }
 nzbtomedia: { version: "12.1.12" }
 oauth2proxy: { version: "v7.6.0" }
-nzbhydra2: { version: "5.3.8" }
+nzbhydra2: { version: "5.3.11" }
 filebrowser: { version: "v2.27.0" }
 sonarr: { version: "4.0.2" }
 radarr: { version: "5.3.6" }
 bazarr: { version: "1.4.2" }
-readarr: { version: "0.3.20-develop" }
+readarr: { version: "0.3.21-develop" }
 prowlarr: { version: "1.0.1"}
 
 # storage class name for local volumes
