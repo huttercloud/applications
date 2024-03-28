@@ -2,9 +2,9 @@ apiVersion: v2
 name: jenkins
 description: install and configure jenkins
 type: application
-version: "4.11.1"
+version: "5.1.4"
 
 dependencies:
 - name: jenkins
-  version: "4.11.1"
+  version: "5.1.4"
   repository: "https://charts.jenkins.io"
