@@ -1,2 +1,3 @@
 ingress:
   host: hello-world.hutter.cloud
+  alias: d12e3fo3yqggy9.cloudfront.net
