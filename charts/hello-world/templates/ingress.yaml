@@ -7,6 +7,10 @@ metadata:
     app.kubernetes.io/name: {{ .Release.Name }}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
+    # if ingress alias is set then add it to the ingress
+    {{- if .Values.ingress.alias }}
+    nginx.ingress.kubernetes.io/server-alias: {{ .Values.ingress.alias }}
+    {{- end }}
     kubernetes.io/ingress.class: public
 spec:
   tls:
