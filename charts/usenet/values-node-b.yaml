@@ -1,14 +1,14 @@
 # Default values for node-b.
 
-sabnzbd: { version: "4.2.3" }
+sabnzbd: { version: "4.3.1" }
 nzbtomedia: { version: "12.1.13" }
 oauth2proxy: { version: "v7.6.0" }
 nzbhydra2: { version: "6.0.0" }
-filebrowser: { version: "v2.28.0" }
+filebrowser: { version: "v2.29.0" }
 sonarr: { version: "4.0.4" }
 radarr: { version: "5.4.6" }
 bazarr: { version: "1.4.2" }
-readarr: { version: "0.3.24-develop" }
+readarr: { version: "0.3.26-develop" }
 prowlarr: { version: "1.0.1"}
 
 # storage class name for local volumes
