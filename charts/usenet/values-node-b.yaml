@@ -1,13 +1,13 @@
 # Default values for node-b.
 
-sabnzbd: { version: "4.3.1" }
+sabnzbd: { version: "4.3.2" }
 nzbtomedia: { version: "12.1.13" }
 oauth2proxy: { version: "v7.6.0" }
 nzbhydra2: { version: "7.1.0" }
 filebrowser: { version: "v2.30.0" }
-sonarr: { version: "4.0.4" }
+sonarr: { version: "4.0.5" }
 radarr: { version: "5.6.0" }
-bazarr: { version: "1.4.2" }
+bazarr: { version: "1.4.3" }
 readarr: { version: "0.3.27-develop" }
 prowlarr: { version: "1.0.1"}
 
