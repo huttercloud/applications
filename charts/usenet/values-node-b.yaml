@@ -6,7 +6,7 @@ oauth2proxy: { version: "v7.6.0" }
 nzbhydra2: { version: "7.2.3" }
 filebrowser: { version: "v2.30.0" }
 sonarr: { version: "4.0.5" }
-radarr: { version: "5.6.0" }
+radarr: { version: "5.7.0" }
 bazarr: { version: "1.4.3" }
 readarr: { version: "0.3.28-develop" }
 prowlarr: { version: "1.0.1"}
