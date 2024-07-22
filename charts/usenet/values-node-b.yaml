@@ -5,10 +5,10 @@ nzbtomedia: { version: "12.1.13" }
 oauth2proxy: { version: "v7.6.0" }
 nzbhydra2: { version: "7.3.0" }
 filebrowser: { version: "v2.30.0" }
-sonarr: { version: "4.0.6" }
-radarr: { version: "5.7.0" }
+sonarr: { version: "4.0.8" }
+radarr: { version: "5.8.3" }
 bazarr: { version: "1.4.3" }
-readarr: { version: "0.3.31-develop" }
+readarr: { version: "0.3.32-develop" }
 prowlarr: { version: "1.0.1"}
 
 # storage class name for local volumes
