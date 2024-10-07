@@ -9,16 +9,16 @@ sonarr: { version: "4.0.9" }
 radarr: { version: "5.11.0" }
 bazarr: { version: "1.4.5" }
 readarr: { version: "0.4.0-develop" }
-prowlarr: { version: "1.0.1"}
+prowlarr: { version: "1.0.1" }
 
 # storage class name for local volumes
 storage_class_name: persistent
 storage_class_name_downloads: persistent-2
 # library nfs storage configuration
 library:
-  nfs_server: 192.168.30.17
+    nfs_server: 192.168.30.17
 
 ingress:
-  host: usenet.hutter.cloud
+    host: usenet.hutter.cloud
 
-readarr_replicas: 1
+readarr_replicas: 0
