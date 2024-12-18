@@ -1,20 +1,24 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: {{ .Values.spec.applicationPrefix }}-jenkins
-  namespace: default
-spec:
-  project: default
-  syncPolicy:
-    automated: {}
-  source:
-    repoURL: git@github.com:huttercloud/applications.git
-    targetRevision: HEAD
-    path: charts/jenkins
-    helm:
-      releaseName: jenkins
-      valueFiles:
-        - {{ .Values.spec.valuesFile }}
-  destination:
-    server: {{ .Values.spec.destination.server }}
-    namespace: default
+#
+# disable jenkins, its borked anyways
+#
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: {{ .Values.spec.applicationPrefix }}-jenkins
+#   namespace: default
+# spec:
+#   project: default
+#   syncPolicy:
+#     automated: {}
+#   source:
+#     repoURL: git@github.com:huttercloud/applications.git
+#     targetRevision: HEAD
+#     path: charts/jenkins
+#     helm:
+#       releaseName: jenkins
+#       valueFiles:
+#         - {{ .Values.spec.valuesFile }}
+#   destination:
+#     server: {{ .Values.spec.destination.server }}
+#     namespace: default
