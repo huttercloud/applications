@@ -3,13 +3,13 @@
 sabnzbd: { version: "4.4.1" }
 nzbtomedia: { version: "12.1.13" }
 oauth2proxy: { version: "v7.7.1" }
-nzbhydra2: { version: "7.10.2" }
+nzbhydra2: { version: "7.11.3" }
 filebrowser: { version: "v2.31.2" }
 sonarr: { version: "4.0.11" }
-radarr: { version: "5.16.3" }
-bazarr: { version: "1.4.5" }
-readarr: { version: "0.4.6-develop" }
-prowlarr: { version: "1.28.2" }
+radarr: { version: "5.17.2" }
+bazarr: { version: "1.5.1" }
+readarr: { version: "0.4.7-develop" }
+prowlarr: { version: "1.29.2" }
 
 # storage class name for local volumes
 storage_class_name: persistent
