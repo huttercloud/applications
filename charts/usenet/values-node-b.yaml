@@ -9,7 +9,7 @@ sonarr: { version: "4.0.13" }
 radarr: { version: "5.19.3" }
 bazarr: { version: "1.5.1" }
 readarr: { version: "0.4.12-develop" }
-prowlarr: { version: "1.31.2" }
+prowlarr: { version: "1.32.2" }
 
 # storage class name for local volumes
 storage_class_name: persistent
