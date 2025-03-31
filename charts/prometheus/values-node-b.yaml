@@ -5,7 +5,7 @@ externalName:
 oauth2:
   enabled: true
   # single line oauth2 proxy version for update-versions script
-  proxy: { version: "v7.8.1" }
+  proxy: { version: "v7.8.2" }
 
 federateService:
   enabled: false
