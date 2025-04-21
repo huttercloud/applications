@@ -8,7 +8,7 @@ filebrowser: { version: "v2.32.0" }
 sonarr: { version: "4.0.14" }
 radarr: { version: "5.21.1" }
 bazarr: { version: "1.5.1" }
-readarr: { version: "0.4.14-develop" }
+readarr: { version: "0.4.15-develop" }
 prowlarr: { version: "1.33.3" }
 
 # storage class name for local volumes
