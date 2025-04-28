@@ -6,10 +6,10 @@ oauth2proxy: { version: "v7.8.2" }
 nzbhydra2: { version: "7.12.3" }
 filebrowser: { version: "v2.32.0" }
 sonarr: { version: "4.0.14" }
-radarr: { version: "5.21.1" }
+radarr: { version: "5.22.4" }
 bazarr: { version: "1.5.1" }
 readarr: { version: "0.4.15-develop" }
-prowlarr: { version: "1.33.3" }
+prowlarr: { version: "1.34.1" }
 
 # storage class name for local volumes
 storage_class_name: persistent
