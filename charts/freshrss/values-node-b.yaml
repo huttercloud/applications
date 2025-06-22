@@ -1,0 +1,8 @@
+# Default values for node-b.
+
+freshrss: { version: "latest" }
+
+storage_class_name: persistent
+
+ingress:
+    freshrss: freshrss.hutter.cloud

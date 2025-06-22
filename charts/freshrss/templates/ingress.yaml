@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-freshrss
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: public
+spec:
+  tls:
+    - hosts: [{{ .Values.ingress.freshrss }}]
+      secretName: {{ .Release.Name }}-tls
+  rules:
+    - host: {{ .Values.ingress.freshrss }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-freshrss
+              port:
+                number: 80

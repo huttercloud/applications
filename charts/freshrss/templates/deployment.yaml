@@ -1,0 +1,39 @@
+##
+# calibre content server
+##
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-freshrss
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}-freshrss
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-freshrss
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-freshrss
+    spec:
+      containers:
+      - name: freshrss
+        image: "lscr.io/linuxserver/freshrss:{{ .Values.freshrss.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: TZ
+          value: Europe/Zurich
+        volumeMounts:
+        - name: {{ .Release.Name }}-freshrss
+          mountPath: /config
+      volumes:
+        - name: {{ .Release.Name }}-freshrss
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-freshrss
+
