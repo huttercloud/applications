@@ -1,5 +1,5 @@
 tautulli: { version: "v2.11.1" }
-oauth2proxy: { version: "v7.9.0" }
+oauth2proxy: { version: "v7.10.0" }
 
 ingress:
   host: tautulli.hutter.cloud
