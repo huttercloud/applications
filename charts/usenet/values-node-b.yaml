@@ -1,15 +1,15 @@
 # Default values for node-b.
 
-sabnzbd: { version: "4.5.3" }
+sabnzbd: { version: "4.5.5" }
 nzbtomedia: { version: "12.1.13" }
 oauth2proxy: { version: "v7.12.0" }
 nzbhydra2: { version: "7.19.2" }
-filebrowser: { version: "v2.44.1" }
+filebrowser: { version: "v2.44.2" }
 sonarr: { version: "4.0.15" }
 radarr: { version: "5.28.0" }
 bazarr: { version: "1.5.3" }
 readarr: { version: "0.4.18-develop" }
-prowlarr: { version: "2.0.5" }
+prowlarr: { version: "2.1.5" }
 
 # storage class name for local volumes
 storage_class_name: persistent
