@@ -1,5 +1,5 @@
 overseerr: { version: "1.34.0" }
-oauth2proxy: { version: "v7.12.0" }
+oauth2proxy: { version: "v7.13.0" }
 
 ingress:
   host: overseerr.hutter.cloud
