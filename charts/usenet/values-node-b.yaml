@@ -3,8 +3,8 @@
 sabnzbd: { version: "4.5.5" }
 nzbtomedia: { version: "12.1.13" }
 oauth2proxy: { version: "v7.13.0" }
-nzbhydra2: { version: "7.19.2" }
-filebrowser: { version: "v2.45.0" }
+nzbhydra2: { version: "8.0.0" }
+filebrowser: { version: "v2.47.0" }
 sonarr: { version: "4.0.16" }
 radarr: { version: "5.28.0" }
 bazarr: { version: "1.5.3" }
